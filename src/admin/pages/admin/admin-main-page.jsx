@@ -1,9 +1,13 @@
 import { Flex, Layout } from "antd";
 import Sider from "antd/es/layout/Sider";
 import { Content, Footer, Header } from "antd/es/layout/layout";
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import AdminMenu from "./admin-menu";
+import { useDispatch } from "react-redux";
+import { allGenres } from "../../../thunks/genresThunk";
+import { allActors } from "../../../thunks/actorsThunk";
+import { allTypes } from "../../../thunks/typesThunk";
 
 const headerStyle = {
   textAlign: "center",
@@ -35,6 +39,13 @@ const layoutStyle = {
 };
 
 const AdminMainPage = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+      dispatch(allGenres());
+      dispatch(allActors());
+      dispatch(allTypes())
+    }, []);
   return (
     <div>
       <Flex gap="middle" wrap="wrap"></Flex>

@@ -7,23 +7,20 @@ const columns = [
   {
     title: "Name",
     dataIndex: "title",
-    sorter: (a, b) => a.age - b.age,
+    sorter: (a, b) => a.title > b.title? 1 : -1,
   },
 ];
-const onChange = (pagination, filters, sorter, extra) => {
-  console.log("params", pagination, filters, sorter, extra);
-};
 const CountriesList = () => {
   const countries = useSelector((state) => state.countries.countries)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(allCountries)
+    dispatch(allCountries())
   }, [])
     return (
       <div>
         <h1>Countries</h1>
-        <Table columns={columns} dataSource={countries} onChange={onChange} />
+        <Table columns={columns} rowKey="_id" dataSource={countries} />
       </div>
     );
 }
