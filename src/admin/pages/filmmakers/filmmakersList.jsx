@@ -1,13 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Table } from "antd";
-import { Link } from "react-router-dom";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 
+
 const columns = [
   {
-    title: "Title",
-    dataIndex: "title",
+    title: "Name",
+    dataIndex: "name",
+    sorter: (a, b) => (a.title > b.title ? 1 : -1),
+  },
+  {
+    title: "Surname",
+    dataIndex: "surname",
     sorter: (a, b) => (a.title > b.title ? 1 : -1),
   },
   {
@@ -15,7 +21,7 @@ const columns = [
     key: "action",
     render: (_, record) => (
       <div>
-        <Link to={`/admin/types/update/${record._id}`}>
+        <Link to={`/admin/filmmakers/update/${record._id}`}>
           <Button type="dashed">
             <EditOutlined />
           </Button>
@@ -30,19 +36,19 @@ const columns = [
   },
 ];
 
-const TypeList = () => {
-    const types = useSelector((state) => state.types.types);
+const FilmmakersList = () => {
+    const filmmakers = useSelector((state) => state.filmmakers.filmmakers);
     return (
       <div>
-        <h1>Types</h1>
+        <h1>Filmmakers</h1>
 
-        <Link to="/admin/types/create">
+        <Link to="/admin/filmmakers/create">
           <Button type="primary">Create</Button>
         </Link>
 
-        <Table columns={columns} rowKey="_id" dataSource={types} />
+        <Table columns={columns} rowKey="_id" dataSource={filmmakers} />
       </div>
     );
 }
 
-export default TypeList;
+export default FilmmakersList;

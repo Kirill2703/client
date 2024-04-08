@@ -1,22 +1,27 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Button, Form, Input } from "antd";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { createTypes } from "../../../thunks/typesThunk";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 
-const TypesCreate = () => {
+const FilmmakersUpdate = () => {
     const dispatch = useDispatch();
     const [form] = Form.useForm();
     const navigate = useNavigate();
+    const { id } = useParams();
+    const filmmakers = useSelector((state) => state.filmmakers.filmmakers);
+
+    useEffect(() => {
+      form.setFieldsValue(filmmakers.find((filmmaker) => filmmaker._id === id));
+    }, [filmmakers]);
 
     const onFinish = (values) => {
-      dispatch(createTypes(values));
+      // dispatch(updateGenres(values));
       form.resetFields();
-      navigate("/admin/types");
+      navigate("/admin/filmmakers");
     };
     return (
       <div>
-        <h1>Add Type</h1>
+        <h1>Update Filmmaker</h1>
 
         <Form
           form={form}
@@ -34,12 +39,25 @@ const TypesCreate = () => {
           autoComplete="off"
         >
           <Form.Item
-            label="Title"
-            name="title"
+            label="Name"
+            name="name"
             rules={[
               {
                 required: true,
-                message: "Please input title type!",
+                message: "Please input name!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Surname"
+            name="surname"
+            rules={[
+              {
+                required: true,
+                message: "Please input surname!",
               },
             ]}
           >
@@ -53,7 +71,7 @@ const TypesCreate = () => {
             }}
           >
             <Button type="primary" htmlType="submit">
-              Add Type
+              Add Filmmaker
             </Button>
           </Form.Item>
         </Form>
@@ -61,4 +79,4 @@ const TypesCreate = () => {
     );
 }
 
-export default TypesCreate;
+export default FilmmakersUpdate;

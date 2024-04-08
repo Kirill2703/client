@@ -11,6 +11,9 @@ import ActorUpdate from "../admin/pages/actors/actorsUpdate";
 import TypeList from "../admin/pages/type/typeList";
 import TypeUpdate from "../admin/pages/type/typeUpdate";
 import TypesCreate from "../admin/pages/type/typesCreate";
+import FilmmakersList from "../admin/pages/filmmakers/filmmakersList";
+import FilmmakersCreate from "../admin/pages/filmmakers/filmmakersCreate";
+import FilmmakersUpdate from "../admin/pages/filmmakers/filmmakersUpdate";
 
 const admin = {
   path: "admin",
@@ -61,6 +64,18 @@ const admin = {
     {
       path: "types/update/:id",
       element: <TypeUpdate />,
+    },
+    {
+      path: "filmmakers",
+      element: <FilmmakersList />,
+    },
+    {
+      path: "filmmakers/create",
+      element: <FilmmakersCreate />,
+    },
+    {
+      path: "filmmakers/update/:id",
+      element: <FilmmakersUpdate />,
     },
   ],
 };

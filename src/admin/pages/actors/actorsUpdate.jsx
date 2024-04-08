@@ -71,7 +71,7 @@ const ActorsUpdate = () => {
           }}
         >
           <Button type="primary" htmlType="submit">
-            Add Genre
+            Add Actor
           </Button>
         </Form.Item>
       </Form>

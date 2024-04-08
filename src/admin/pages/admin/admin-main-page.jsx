@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { allGenres } from "../../../thunks/genresThunk";
 import { allActors } from "../../../thunks/actorsThunk";
 import { allTypes } from "../../../thunks/typesThunk";
+import { allFilmmakers } from "../../../thunks/filmmakersThunk";
 
 const headerStyle = {
   textAlign: "center",
@@ -45,6 +46,7 @@ const AdminMainPage = () => {
       dispatch(allGenres());
       dispatch(allActors());
       dispatch(allTypes())
+      dispatch(allFilmmakers())
     }, []);
   return (
     <div>
