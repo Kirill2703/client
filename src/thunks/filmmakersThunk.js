@@ -15,11 +15,15 @@ export const updateFilmmakers = createAsyncThunk(
   "filmmakers.update",
   async (payload) => {
     const responce = await api.put(`/filmmakers/${payload._id}`, payload);
-    return responce.data;
+    return { ...responce.data, payload };
   }
 );
 
-export const removeFilmmakers = createAsyncThunk("/filmmakers.remove", async (payload) => {
-  const responce = await api.delete(`/filmmakers/${payload._id}`, payload);
-  return responce.data;
-});
+export const removeFilmmakers = createAsyncThunk(
+  "filmmakers.remove",
+  async (payload) => {
+    const responce = await api.delete(`/filmmakers/${payload}`);
+    console.log({ ...responce.data, _id: payload });
+    return { ...responce.data, _id: payload };
+  }
+);

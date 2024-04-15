@@ -53,6 +53,11 @@ const items = [
     "filmmakers",
     <AppstoreOutlined />
   ),
+  getItem(
+    <NavLink to="/admin/movies">Movies</NavLink>,
+    "movies",
+    <AppstoreOutlined />
+  ),
 
   // getItem("Navigation Two", "sub2", <AppstoreOutlined />, [
   //   getItem("Option 9", "9"),

@@ -2,6 +2,7 @@ import { Button, Form, Input } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { updateGenres } from '../../../thunks/genresThunk'
 
 const GenreUpdate = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const GenreUpdate = () => {
   }, [genres]);
 
   const onFinish = (values) => {
-    // dispatch(updateGenres(values));
+    dispatch(updateGenres(values));
     form.resetFields();
     navigate("/admin/genres");
   };
@@ -50,6 +51,10 @@ const GenreUpdate = () => {
           ]}
         >
           <Input />
+        </Form.Item>
+
+        <Form.Item name = "_id" noStyle>
+          <Input type="hidden"/>
         </Form.Item>
 
         <Form.Item

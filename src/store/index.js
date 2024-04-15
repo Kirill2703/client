@@ -3,7 +3,8 @@ import CountryReducer from "../slices/countriesSlice"
 import GenreReducer from "../slices/genresSlice";
 import ActorReducer from "../slices/actorsSlice";
 import TypeReducer from "../slices/typesSlice"
-import FilmmakerReducer from "../slices/filmmakers";
+import FilmmakerReducer from "../slices/filmmakersSlice";
+import MovieReducer from '../slices/moviesSlice'
 
 const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
         actors: ActorReducer,
         types: TypeReducer,
         filmmakers: FilmmakerReducer,
+        movies: MovieReducer,
     }
 })
 

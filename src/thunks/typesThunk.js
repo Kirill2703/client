@@ -14,12 +14,18 @@ export const createTypes = createAsyncThunk(
   }
 );
 
-export const updateTypes = createAsyncThunk("types.update", async (payload) => {
-  const responce = await api.put(`/types/${payload._id}`, payload);
-  return responce.data;
-});
+export const updateTypes = createAsyncThunk(
+  "types.update",
+  async (payload) => {
+    const responce = await api.put(`/types/${payload._id}`, payload);
+    return { ...responce.data, payload };
+  }
+);
 
-export const removeTypes = createAsyncThunk("types.remove", async (payload) => {
-  const responce = await api.delete(`/types/${payload._id}`, payload);
-  return responce.data;
-});
+export const removeTypes = createAsyncThunk(
+  "types.remove",
+  async (payload) => {
+    const responce = await api.delete(`/types/${payload}`);
+    return { ...responce.data, _id: payload };
+  }
+);

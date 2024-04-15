@@ -9,6 +9,8 @@ import { allGenres } from "../../../thunks/genresThunk";
 import { allActors } from "../../../thunks/actorsThunk";
 import { allTypes } from "../../../thunks/typesThunk";
 import { allFilmmakers } from "../../../thunks/filmmakersThunk";
+import { allMovies } from "../../../thunks/moviesThunk";
+import {allCountries} from "../../../thunks/countriesThunk"
 
 const headerStyle = {
   textAlign: "center",
@@ -47,6 +49,8 @@ const AdminMainPage = () => {
       dispatch(allActors());
       dispatch(allTypes())
       dispatch(allFilmmakers())
+      dispatch(allMovies())
+      dispatch(allCountries())
     }, []);
   return (
     <div>

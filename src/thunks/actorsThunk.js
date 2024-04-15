@@ -18,14 +18,15 @@ export const updateActors = createAsyncThunk(
   "actors.update",
   async (payload) => {
     const responce = await api.put(`/actors/${payload._id}`, payload);
-    return responce.data;
+    return { ...responce.data, payload };
   }
 );
 
 export const removeActors = createAsyncThunk(
   "actors.remove",
   async (payload) => {
-    const responce = await api.delete(`/actors/${payload._id}`, payload);
-    return responce.data;
+    const responce = await api.delete(`/actors/${payload}`);
+    console.log({ ...responce.data, _id: payload });
+    return { ...responce.data, _id: payload };
   }
 );

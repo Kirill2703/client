@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import { Button, Form, Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { updateFilmmakers } from '../../../thunks/filmmakersThunk';
 
 const FilmmakersUpdate = () => {
     const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const FilmmakersUpdate = () => {
     }, [filmmakers]);
 
     const onFinish = (values) => {
-      // dispatch(updateGenres(values));
+      dispatch(updateFilmmakers(values));
       form.resetFields();
       navigate("/admin/filmmakers");
     };
@@ -62,6 +63,10 @@ const FilmmakersUpdate = () => {
             ]}
           >
             <Input />
+          </Form.Item>
+
+          <Form.Item name="_id" noStyle>
+            <Input type="hidden" />
           </Form.Item>
 
           <Form.Item

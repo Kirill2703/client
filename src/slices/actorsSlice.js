@@ -1,4 +1,4 @@
-import { allActors } from "../thunks/actorsThunk"
+import { allActors, createActors, removeActors, updateActors } from "../thunks/actorsThunk"
 import { createSlice } from "@reduxjs/toolkit";
 
 
@@ -13,7 +13,21 @@ const actorSlice = createSlice({
         builder
             .addCase(allActors.fulfilled, (state, action) => {
             state.actors = action.payload
-        })
+            })
+            .addCase(createActors.fulfilled, (state, action) => {
+            state.genres.push(action.payload)
+          })
+          .addCase(updateActors.fulfilled, (state, action) => {
+            // const updated = action.payload.payload
+            const { _id, name, surname } = action.payload.payload;
+            const actor = state.actors.find((a) => a._id === _id);
+              actor.name = name;
+              actor.surname = surname;
+            // state.genres = action.payload;
+          })
+       .addCase(removeActors.fulfilled, (state, action) => {
+            state.actors = state.actors.filter((a) => a._id !== action.payload._id)
+          })
     }
 })
 
