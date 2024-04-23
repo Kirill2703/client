@@ -17,12 +17,16 @@ const moviesSlice = createSlice({
         state.movies.push(action.payload);
       })
       .addCase(updateMovies.fulfilled, (state, action) => {
-        // const updated = action.payload.payload
-        const { _id, title } = action.payload.payload;
-        const movie = state.movies.find((g) => g._id === _id);
-        movie.title = title;
-        // state.genres = action.payload;
+        const { _id} = action.payload.payload;
+        
+        state.movies = state.movies.map((g) => {
+          if (g._id === _id) {
+            return action.payload.movie
+          }
+          return g
+        })
       })
+          
       .addCase(removeMovies.fulfilled, (state, action) => {
         state.movies = state.movies.filter((g) => g._id !== action.payload._id);
       });

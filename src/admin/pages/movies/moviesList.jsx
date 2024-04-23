@@ -32,6 +32,7 @@ const MoviesList = () => {
         title: "Year",
         dataIndex: "year",
         sorter: (a, b) => (a.title > b.title ? 1 : -1),
+        render: (year) => new Date(year).getFullYear()
       },
       {
         title: "Genre",

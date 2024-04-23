@@ -17,6 +17,9 @@ import FilmmakersUpdate from "../admin/pages/filmmakers/filmmakersUpdate";
 import MoviesList from "../admin/pages/movies/moviesList";
 import MoviesCreate from "../admin/pages/movies/moviesCreate";
 import MoviesUpdate from "../admin/pages/movies/moviesUpdate";
+import PageHome from "../client/pages/home/pageHome";
+
+
 
 const admin = {
   path: "admin",
@@ -95,7 +98,13 @@ const admin = {
   ],
 };
 
-const client = {};
+const client = {
+  path: '',
+  element: <PageHome />,
+  children: [
+
+  ]
+};
 
 const router = createBrowserRouter([
   {

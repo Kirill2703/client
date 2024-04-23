@@ -23,6 +23,7 @@ const contentStyle = {
   textAlign: "center",
   minHeight: 120,
   backgroundColor: "#fff",
+  padding: "0 20px"
 };
 const siderStyle = {
   textAlign: "center",

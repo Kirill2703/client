@@ -1,89 +1,47 @@
-import React from "react";
-import { Button, Form, Input, Select, DatePicker} from "antd";
+import React, { useEffect, useState } from "react";
+import { Button, Form, Input, DatePicker, Tabs } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { message, Upload, Tabs } from "antd";
-import { createMovies } from "../../../thunks/moviesThunk";
-import {
-  MinusCircleOutlined,
-  PlusOutlined,
-  InboxOutlined,
-} from "@ant-design/icons";
 
+import { createMovies, updateMovies } from "../../../thunks/moviesThunk";
+import UploadImg from "./create/upload-img";
+import ItemsList from "./create/itemsList";
+import UploadGallery from "./create/uploadGallery";
+import dayjs from "dayjs";
 
-
-const formItemLayout = {
-  labelCol: {
-    xs: {
-      span: 8,
-    },
-    sm: {
-      span: 8,
-    },
-  },
-  wrapperCol: {
-    xs: {
-      span: 16,
-    },
-    sm: {
-      span: 16,
-    },
-  },
-};
-const formItemLayoutWithOutLabel = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 8,
-    },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
-  },
-};
-
-const { Dragger } = Upload;
-const props = {
-  name: "img",
-  multiple: false,
-  action: "http://127.0.0.1:4000/upload-img",
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-  onDrop(e) {
-    console.log("Dropped files", e.dataTransfer.files);
-  },
-};
-
-const {TabPane} = Tabs
-
-
-const MoviesCreate = () => {
+const MoviesCreate = ({ initialValuesUpdate, functionSave }) => {
   const countries = useSelector((state) => state.countries.countries);
   const genres = useSelector((state) => state.genres.genres);
   const actors = useSelector((state) => state.actors.actors);
   const types = useSelector((state) => state.types.types);
   const filmmakers = useSelector((state) => state.filmmakers.filmmakers);
-  
+
+  const [filmImage, setfilmImage] = useState(null);
+  const [filmGallery, setfilmGallery] = useState(null);
+
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
   const onFinish = (values) => {
-    values.img = 'http://127.0.0.1:4000/uploads/' + values.img.file.name
-    dispatch(createMovies(values));
+    values.trailer = values.trailer
+      .replace("watch?v=", "embed/")
+      .replace(/&t=.+/g, "")
+    if (functionSave) {
+      dispatch(
+        updateMovies({
+          ...values,
+          _id: initialValuesUpdate._id,
+          img: values.img[0].url ? values.img[0].url : values.img ,
+          year: values.year.year(),
+        })
+      );
+    } else {
+      dispatch(createMovies(values));
+    }
+
     form.resetFields();
     navigate("/admin/movies");
-    console.log(values);
   };
 
   const initialValues = {
@@ -91,13 +49,207 @@ const MoviesCreate = () => {
     genres: [{}],
     actors: [{}],
     types: [{}],
-    filmmakers: [{}]
+    filmmakers: [{}],
+    likes: 0,
+    dislikes: 0,
+    price: 0,
+    rating: 0,
+    agerating: "14+",
+    runtimes: "112 min",
+    year: dayjs("2020"),
   };
+
+  useEffect(() => {
+    form.setFieldsValue(initialValuesUpdate || initialValues);
+    setfilmImage(form.getFieldValue("img"));
+    setfilmGallery(form.getFieldValue("gallery"));
+  }, [initialValuesUpdate]);
+
+  const tab1 = (
+    <>
+      {" "}
+      <Form.Item
+        label="Title"
+        name="title"
+        rules={[
+          {
+            required: true,
+            message: "Please input title!",
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item label="Image" name="img">
+        <UploadImg form={form} img={filmImage} />
+      </Form.Item>
+      <Form.Item
+        label="Year"
+        name="year"
+        rules={[
+          {
+            required: true,
+            message: "Please input year!",
+          },
+        ]}
+      >
+        <DatePicker
+          picker="year"
+          format={{
+            format: "YYYY",
+            type: "mask",
+          }}
+        />
+      </Form.Item>
+      <Form.List name="countries">
+        {(fields, { add, remove }, { errors }) => (
+          <ItemsList
+            items={countries}
+            fields={fields}
+            add={add}
+            remove={remove}
+            errors={errors}
+            title="Country"
+          />
+        )}
+      </Form.List>
+      <Form.List name="genres">
+        {(fields, { add, remove }, { errors }) => (
+          <ItemsList
+            items={genres}
+            fields={fields}
+            add={add}
+            remove={remove}
+            errors={errors}
+            title="Genre"
+          />
+        )}
+      </Form.List>
+      <Form.List name="actors">
+        {(fields, { add, remove }, { errors }) => (
+          <ItemsList
+            items={actors}
+            fields={fields}
+            add={add}
+            remove={remove}
+            errors={errors}
+            title="Actor"
+          />
+        )}
+      </Form.List>
+      <Form.List name="types">
+        {(fields, { add, remove }, { errors }) => (
+          <ItemsList
+            items={types}
+            fields={fields}
+            add={add}
+            remove={remove}
+            errors={errors}
+            title="Types"
+          />
+        )}
+      </Form.List>
+      <Form.List name="filmmakers">
+        {(fields, { add, remove }, { errors }) => (
+          <ItemsList
+            items={filmmakers}
+            fields={fields}
+            add={add}
+            remove={remove}
+            errors={errors}
+            title="Filmmaker"
+          />
+        )}
+      </Form.List>
+      <Form.Item
+        wrapperCol={{
+          offset: 8,
+          span: 16,
+        }}
+      >
+        <Button type="primary" htmlType="submit">
+          Add Movie
+        </Button>
+      </Form.Item>
+    </>
+  );
+
+  const tab2 = (
+    <>
+      <Form.Item label="Gallery" name="gallery">
+        <UploadGallery form={form} images={filmGallery} />
+      </Form.Item>
+
+      <Form.Item label="Trailer" name="trailer">
+        <Input />
+      </Form.Item>
+    </>
+  );
+
+  const tab3 = (
+    <>
+      <Form.Item label="Likes" name="likes">
+        <Input type="number" />
+      </Form.Item>
+
+      <Form.Item label="Dislikes" name="dislikes">
+        <Input type="number" />
+      </Form.Item>
+
+      <Form.Item label="Price" name="price">
+        <Input type="number" />
+      </Form.Item>
+
+      <Form.Item label="Rating" name="rating">
+        <Input type="number" />
+      </Form.Item>
+
+      <Form.Item label="Agerating" name="agerating">
+        <Input />
+      </Form.Item>
+
+      <Form.Item label="Runtimes" name="runtimes">
+        <Input />
+      </Form.Item>
+    </>
+  );
+
+  const tabBottom = (
+    <>
+      <Form.Item
+        wrapperCol={{
+          offset: 8,
+          span: 16,
+        }}
+      >
+        <Button type="primary" htmlType="submit">
+          Add Movie
+        </Button>
+      </Form.Item>
+    </>
+  );
+
+  const items = [
+    {
+      key: 1,
+      label: "Main Tab",
+      children: tab1,
+    },
+    {
+      key: 2,
+      label: "Secondar Tab",
+      children: tab2,
+    },
+    {
+      key: 3,
+      label: "Info Tab",
+      children: tab3,
+    },
+  ];
 
   return (
     <div>
       <h1>Create Movie</h1>
-
       <Form
         form={form}
         name="basic"
@@ -114,490 +266,11 @@ const MoviesCreate = () => {
         onFinish={onFinish}
         autoComplete="off"
       >
-        <Tabs defaultActiveKey="1">
-          <TabPane tab="General" key="1">
-            <Form.Item
-              label="Title"
-              name="title"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input title!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item label="Image" name="img">
-              <Dragger {...props}>
-                <p className="ant-upload-drag-icon">
-                  <InboxOutlined />
-                </p>
-                <p className="ant-upload-text">
-                  Click or drag file to this area to upload
-                </p>
-                <p className="ant-upload-hint">
-                  Support for a single or bulk upload. Strictly prohibited from
-                  uploading company data or other banned files.
-                </p>
-              </Dragger>
-            </Form.Item>
-
-            <Form.Item
-              label="Year"
-              name="year"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input year!",
-                },
-              ]}
-            >
-              <DatePicker
-                picker="year"
-                format={{
-                  format: "YYYY",
-                  type: "mask",
-                }}
-              />
-            </Form.Item>
-
-            <Form.List name="countries">
-              {(fields, { add, remove }, { errors }) => (
-                <>
-                  {fields.map((field, index) => (
-                    <Form.Item
-                      {...(index === 0
-                        ? formItemLayout
-                        : formItemLayoutWithOutLabel)}
-                      label={index === 0 ? "Country" : ""}
-                      required={true}
-                      key={field.key}
-                    >
-                      <Form.Item
-                        {...field}
-                        validateTrigger={["onChange", "onBlur"]}
-                        rules={[
-                          {
-                            required: true,
-                            whitespace: true,
-                            message: "Please choose country!",
-                          },
-                        ]}
-                        noStyle
-                      >
-                        <Select
-                          showSearch
-                          filterOption={(inputValue, option) => {
-                            return option.children
-                              .toLowerCase()
-                              .startsWith(inputValue.toLowerCase());
-                          }}
-                        >
-                          {countries.map((country) => (
-                            <Select.Option
-                              key={country._id}
-                              value={country._id}
-                              rules={[
-                                {
-                                  required: true,
-                                  whitespace: true,
-                                  message: "Please choose country!",
-                                },
-                              ]}
-                            >
-                              {country.title}
-                            </Select.Option>
-                          ))}
-                        </Select>
-                      </Form.Item>
-                      {fields.length > 1 ? (
-                        <MinusCircleOutlined
-                          className="dynamic-delete-button"
-                          onClick={() => remove(field.name)}
-                        />
-                      ) : null}
-                    </Form.Item>
-                  ))}
-                  <Form.Item
-                    wrapperCol={{
-                      offset: 8,
-                      span: 16,
-                    }}
-                  >
-                    <Button
-                      type="dashed"
-                      onClick={() => add()}
-                      style={{
-                        width: "60%",
-                      }}
-                      icon={<PlusOutlined />}
-                    >
-                      Add Country
-                    </Button>
-                    <Form.ErrorList errors={errors} />
-                  </Form.Item>
-                </>
-              )}
-            </Form.List>
-
-            <Form.List name="genres">
-              {(fields, { add, remove }, { errors }) => (
-                <>
-                  {fields.map((field, index) => (
-                    <Form.Item
-                      {...(index === 0
-                        ? formItemLayout
-                        : formItemLayoutWithOutLabel)}
-                      label={index === 0 ? "Genre" : ""}
-                      required={true}
-                      key={field.key}
-                    >
-                      <Form.Item
-                        {...field}
-                        validateTrigger={["onChange", "onBlur"]}
-                        rules={[
-                          {
-                            required: true,
-                            whitespace: true,
-                            message: "Please choose genre!",
-                          },
-                        ]}
-                        noStyle
-                      >
-                        <Select
-                          showSearch
-                          filterOption={(inputValue, option) => {
-                            return option.children
-                              .toLowerCase()
-                              .startsWith(inputValue.toLowerCase());
-                          }}
-                        >
-                          {genres.map((genre) => (
-                            <Select.Option
-                              key={genre._id}
-                              value={genre._id}
-                              rules={[
-                                {
-                                  required: true,
-                                  whitespace: true,
-                                  message: "Please choose genre!",
-                                },
-                              ]}
-                            >
-                              {genre.title}
-                            </Select.Option>
-                          ))}
-                        </Select>
-                      </Form.Item>
-                      {fields.length > 1 ? (
-                        <MinusCircleOutlined
-                          className="dynamic-delete-button"
-                          onClick={() => remove(field.name)}
-                        />
-                      ) : null}
-                    </Form.Item>
-                  ))}
-                  <Form.Item
-                    wrapperCol={{
-                      offset: 8,
-                      span: 16,
-                    }}
-                  >
-                    <Button
-                      type="dashed"
-                      onClick={() => add()}
-                      style={{
-                        width: "60%",
-                      }}
-                      icon={<PlusOutlined />}
-                    >
-                      Add Genre
-                    </Button>
-                    <Form.ErrorList errors={errors} />
-                  </Form.Item>
-                </>
-              )}
-            </Form.List>
-
-            <Form.List name="actors">
-              {(fields, { add, remove }, { errors }) => (
-                <>
-                  {fields.map((field, index) => (
-                    <Form.Item
-                      {...(index === 0
-                        ? formItemLayout
-                        : formItemLayoutWithOutLabel)}
-                      label={index === 0 ? "Actor" : ""}
-                      required={true}
-                      key={field.key}
-                    >
-                      <Form.Item
-                        {...field}
-                        validateTrigger={["onChange", "onBlur"]}
-                        rules={[
-                          {
-                            required: true,
-                            whitespace: true,
-                            message: "Please choose actor!",
-                          },
-                        ]}
-                        noStyle
-                      >
-                        <Select
-                          showSearch
-                          filterOption={(inputValue, option) => {
-                            return option.children
-                              .toLowerCase()
-                              .startsWith(inputValue.toLowerCase());
-                          }}
-                        >
-                          {actors.map((actor) => (
-                            <Select.Option
-                              key={actor._id}
-                              value={actor._id}
-                              rules={[
-                                {
-                                  required: true,
-                                  whitespace: true,
-                                  message: "Please choose actor!",
-                                },
-                              ]}
-                            >
-                              {actor.name} {actor.surname}
-                            </Select.Option>
-                          ))}
-                        </Select>
-                      </Form.Item>
-                      {fields.length > 1 ? (
-                        <MinusCircleOutlined
-                          className="dynamic-delete-button"
-                          onClick={() => remove(field.name)}
-                        />
-                      ) : null}
-                    </Form.Item>
-                  ))}
-                  <Form.Item
-                    wrapperCol={{
-                      offset: 8,
-                      span: 16,
-                    }}
-                  >
-                    <Button
-                      type="dashed"
-                      onClick={() => add()}
-                      style={{
-                        width: "60%",
-                      }}
-                      icon={<PlusOutlined />}
-                    >
-                      Add Actor
-                    </Button>
-                    <Form.ErrorList errors={errors} />
-                  </Form.Item>
-                </>
-              )}
-            </Form.List>
-
-            <Form.List name="types">
-              {(fields, { add, remove }, { errors }) => (
-                <>
-                  {fields.map((field, index) => (
-                    <Form.Item
-                      {...(index === 0
-                        ? formItemLayout
-                        : formItemLayoutWithOutLabel)}
-                      label={index === 0 ? "Type" : ""}
-                      required={true}
-                      key={field.key}
-                    >
-                      <Form.Item
-                        {...field}
-                        validateTrigger={["onChange", "onBlur"]}
-                        rules={[
-                          {
-                            required: true,
-                            whitespace: true,
-                            message: "Please choose type!",
-                          },
-                        ]}
-                        noStyle
-                      >
-                        <Select
-                          showSearch
-                          filterOption={(inputValue, option) => {
-                            return option.children
-                              .toLowerCase()
-                              .startsWith(inputValue.toLowerCase());
-                          }}
-                        >
-                          {types.map((type) => (
-                            <Select.Option
-                              key={type._id}
-                              value={type._id}
-                              rules={[
-                                {
-                                  required: true,
-                                  whitespace: true,
-                                  message: "Please choose type!",
-                                },
-                              ]}
-                            >
-                              {type.title}
-                            </Select.Option>
-                          ))}
-                        </Select>
-                      </Form.Item>
-                      {fields.length > 1 ? (
-                        <MinusCircleOutlined
-                          className="dynamic-delete-button"
-                          onClick={() => remove(field.name)}
-                        />
-                      ) : null}
-                    </Form.Item>
-                  ))}
-                  <Form.Item
-                    wrapperCol={{
-                      offset: 8,
-                      span: 16,
-                    }}
-                  >
-                    <Button
-                      type="dashed"
-                      onClick={() => add()}
-                      style={{
-                        width: "60%",
-                      }}
-                      icon={<PlusOutlined />}
-                    >
-                      Add Type
-                    </Button>
-                    <Form.ErrorList errors={errors} />
-                  </Form.Item>
-                </>
-              )}
-            </Form.List>
-
-            <Form.List name="filmmakers">
-              {(fields, { add, remove }, { errors }) => (
-                <>
-                  {fields.map((field, index) => (
-                    <Form.Item
-                      {...(index === 0
-                        ? formItemLayout
-                        : formItemLayoutWithOutLabel)}
-                      label={index === 0 ? "Filmmaker" : ""}
-                      required={true}
-                      key={field.key}
-                    >
-                      <Form.Item
-                        {...field}
-                        validateTrigger={["onChange", "onBlur"]}
-                        rules={[
-                          {
-                            required: true,
-                            whitespace: true,
-                            message: "Please choose filmmaker!",
-                          },
-                        ]}
-                        noStyle
-                      >
-                        <Select
-                          showSearch
-                          filterOption={(inputValue, option) => {
-                            return option.children
-                              .toLowerCase()
-                              .startsWith(inputValue.toLowerCase());
-                          }}
-                        >
-                          {filmmakers.map((filmmaker) => (
-                            <Select.Option
-                              key={filmmaker._id}
-                              value={filmmaker._id}
-                              rules={[
-                                {
-                                  required: true,
-                                  whitespace: true,
-                                  message: "Please choose filmmaker!",
-                                },
-                              ]}
-                            >
-                              {filmmaker.name} {filmmaker.surname}
-                            </Select.Option>
-                          ))}
-                        </Select>
-                      </Form.Item>
-                      {fields.length > 1 ? (
-                        <MinusCircleOutlined
-                          className="dynamic-delete-button"
-                          onClick={() => remove(field.name)}
-                        />
-                      ) : null}
-                    </Form.Item>
-                  ))}
-                  <Form.Item
-                    wrapperCol={{
-                      offset: 8,
-                      span: 16,
-                    }}
-                  >
-                    <Button
-                      type="dashed"
-                      onClick={() => add()}
-                      style={{
-                        width: "60%",
-                      }}
-                      icon={<PlusOutlined />}
-                    >
-                      Add Filmmaker
-                    </Button>
-                    <Form.ErrorList errors={errors} />
-                  </Form.Item>
-                </>
-              )}
-            </Form.List>
-
-            <Form.Item
-              wrapperCol={{
-                offset: 8,
-                span: 16,
-              }}
-            >
-              <Button type="primary" htmlType="submit">
-                Add Movie
-              </Button>
-            </Form.Item>
-          </TabPane>
-
-          <TabPane tab="Secondary" key="2">
-            <Form.Item label="Gallery" name="gallery">
-              <Dragger {...props}>
-                <p className="ant-upload-drag-icon">
-                  <InboxOutlined />
-                </p>
-                <p className="ant-upload-text">
-                  Click or drag file to this area to upload
-                </p>
-                <p className="ant-upload-hint">
-                  Support for a single or bulk upload. Strictly prohibited from
-                  uploading company data or other banned files.
-                </p>
-              </Dragger>
-            </Form.Item>
-          </TabPane>
-
-          <Form.Item
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-          >
-            <Button type="primary" htmlType="submit">
-              Add Movie
-            </Button>
-          </Form.Item>
-        </Tabs>
+        <Tabs
+          defaultActiveKey="1"
+          items={items}
+          tabBarExtraContent={tabBottom}
+        />
       </Form>
     </div>
   );

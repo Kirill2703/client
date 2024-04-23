@@ -31,3 +31,40 @@ img{
     display: flex;
     gap: 16px;
 }
+
+:where(.css-dev-only-do-not-override-11xg00t).ant-upload-wrapper .ant-upload-drag{
+  height: auto !important;
+}
+
+.container{
+  overflow: hidden;
+}
+
+.genre{
+  border: 1px solid #333;
+  background-color: #333;
+  width: 40%;
+  color: #ddd;
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.movie{
+  position: relative;
+}
+
+.genre span {
+  margin-right: 5px;
+}
+
+.title{
+  text-align: center;
+}
+

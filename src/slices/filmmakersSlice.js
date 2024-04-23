@@ -17,12 +17,10 @@ const filmmakerSlice = createSlice({
             state.genres.push(action.payload)
           })
           .addCase(updateFilmmakers.fulfilled, (state, action) => {
-            // const updated = action.payload.payload
             const { _id, name, surname } = action.payload.payload;
             const filmmaker = state.filmmakers.find((f) => f._id === _id);
               filmmaker.name = name;
               filmmaker.surname = surname;
-            // state.genres = action.payload;
           })
        .addCase(removeFilmmakers.fulfilled, (state, action) => {
             state.filmmakers = state.filmmakers.filter((f) => f._id !== action.payload._id)
