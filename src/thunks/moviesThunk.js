@@ -23,3 +23,19 @@ export const removeMovies = createAsyncThunk("movies.remove", async (payload) =>
   const responce = await api.delete(`/movies/${payload}`);
   return { ...responce.data, _id: payload };
 });
+
+export const setMoviesLikes = createAsyncThunk(
+  "movies.likes",
+  async (payload) => {
+    await api.get(`/movies/like/${payload.id}`);
+    return payload.id;
+  }
+);
+
+export const setMoviesDislikes = createAsyncThunk(
+  "movies.dislikes",
+  async (payload) => {
+    await api.get(`/movies/dislike/${payload.id}`);
+    return payload.id;
+  }
+);

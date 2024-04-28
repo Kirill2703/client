@@ -6,7 +6,7 @@ import GenresList from "../admin/pages/genres/genres-list";
 import GenreCreate from "../admin/pages/genres/genreCreate";
 import GenreUpdate from "../admin/pages/genres/genreUpdate";
 import ActorsList from "../admin/pages/actors/actors-list";
-import ActorCreate from '../admin/pages/actors/actorsCreate';
+import ActorCreate from "../admin/pages/actors/actorsCreate";
 import ActorUpdate from "../admin/pages/actors/actorsUpdate";
 import TypeList from "../admin/pages/type/typeList";
 import TypeUpdate from "../admin/pages/type/typeUpdate";
@@ -18,8 +18,10 @@ import MoviesList from "../admin/pages/movies/moviesList";
 import MoviesCreate from "../admin/pages/movies/moviesCreate";
 import MoviesUpdate from "../admin/pages/movies/moviesUpdate";
 import PageHome from "../client/pages/home/pageHome";
-
-
+import MoviePage from "../client/pages/movie/moviePage";
+import Main from "../client/pages/Main";
+import Country from "../client/pages/country/country";
+import Genre from "../client/pages/genre/genre";
 
 const admin = {
   path: "admin",
@@ -99,11 +101,26 @@ const admin = {
 };
 
 const client = {
-  path: '',
-  element: <PageHome />,
+  path: "",
+  element: <Main />,
   children: [
-
-  ]
+    {
+      index: true,
+      element: <PageHome />,
+    },
+    {
+      path: "/movie/:id",
+      element: <MoviePage />,
+    },
+    {
+      path: "/country/:id",
+      element: <Country />,
+    },
+    {
+      path: "/genres/:id",
+      element: <Genre />,
+    },
+  ],
 };
 
 const router = createBrowserRouter([

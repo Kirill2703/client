@@ -1,14 +1,14 @@
-body{
-    margin: 0;
+body {
+  margin: 0;
 }
 
-img{
-    max-width: 100%;
-    display: block;
+img {
+  max-width: 100%;
+  display: block;
 }
 
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
 
 .dynamic-delete-button {
@@ -27,36 +27,36 @@ img{
   opacity: 0.5;
 }
 
-.ant-form-item-control-input-content{
-    display: flex;
-    gap: 16px;
+.ant-form-item-control-input-content {
+  display: flex;
+  gap: 16px;
 }
 
-:where(.css-dev-only-do-not-override-11xg00t).ant-upload-wrapper .ant-upload-drag{
+:where(.css-dev-only-do-not-override-11xg00t).ant-upload-wrapper
+  .ant-upload-drag {
   height: auto !important;
 }
 
-.container{
+.container {
   overflow: hidden;
 }
 
-.genre{
+.genre {
   border: 1px solid #333;
   background-color: #333;
   width: 40%;
   color: #ddd;
   position: absolute;
-  top: 5px;
+  top: 0px;
   right: 0px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 4px;
   font-size: 16px;
   opacity: 0.7;
 }
 
-.movie{
+.movie {
   position: relative;
 }
 
@@ -64,7 +64,54 @@ img{
   margin-right: 5px;
 }
 
-.title{
+.title {
   text-align: center;
 }
+
+.all-movies {
+  display: flex;
+  gap: 20px;
+}
+
+.title {
+  text-align: center;
+}
+
+.title-img {
+  margin-left: 20px;
+}
+
+.information-block {
+  text-align: center;
+}
+
+.rating {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.rating-users {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.dislikes-rating {
+  margin-left: 50px;
+}
+
+.icon-like,
+.icon-dislike {
+  color: #777;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.icon-like:hover,
+.icon-dislike:hover{
+  color: black;
+}
+
 

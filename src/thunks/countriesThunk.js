@@ -10,3 +10,8 @@ export const createCountries = createAsyncThunk("countries.create", async (paylo
   const responce = await api.post("/countries", payload);
   return responce.data;
 });
+
+export const getCountry = createAsyncThunk("countries.get", async (payload) => {
+  const responce = await api.get(`/countries/${payload.id}`);
+  return responce.data;
+});

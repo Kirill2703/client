@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Button, Form, Input, DatePicker, Tabs } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
 import { createMovies, updateMovies } from "../../../thunks/moviesThunk";
 import UploadImg from "./create/upload-img";
 import ItemsList from "./create/itemsList";
@@ -23,26 +22,31 @@ const MoviesCreate = ({ initialValuesUpdate, functionSave }) => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
-  const onFinish = (values) => {
-    values.trailer = values.trailer
-      .replace("watch?v=", "embed/")
-      .replace(/&t=.+/g, "")
-    if (functionSave) {
-      dispatch(
-        updateMovies({
-          ...values,
-          _id: initialValuesUpdate._id,
-          img: values.img[0].url ? values.img[0].url : values.img ,
-          year: values.year.year(),
-        })
-      );
-    } else {
-      dispatch(createMovies(values));
-    }
+ const onFinish = (values) => {
+   if (values.trailer)
+     values.trailer = values.trailer
+       .replace("watch?v=", "embed/")
+       .replace(/&t=.+/g, "");
 
-    form.resetFields();
-    navigate("/admin/movies");
-  };
+   if (functionSave) {
+     dispatch(
+       updateMovies({
+         ...values,
+         _id: initialValuesUpdate._id,
+         img: values.img[0].url ? values.img[0].url : values.img,
+         gallery: values.gallery
+           ? values.gallery.map((i) => (i.url ? i.url : i))
+           : initialValuesUpdate.gallery.map((i) => (i.url ? i.url : i)),
+         year: values.year.year(),
+       })
+     );
+   } else {
+     dispatch(createMovies(values));
+   }
+
+   form.resetFields();
+   navigate("/admin/movies");
+ };
 
   const initialValues = {
     countries: [{}],

@@ -29,3 +29,8 @@ export const removeGenres = createAsyncThunk(
    return { ...responce.data, _id: payload };
   }
 );
+
+export const getGenre = createAsyncThunk("genres.get", async (payload) => {
+  const responce = await api.get(`/genres/${payload.id}`);
+  return responce.data;
+});
