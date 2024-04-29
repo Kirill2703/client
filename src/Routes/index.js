@@ -22,6 +22,12 @@ import MoviePage from "../client/pages/movie/moviePage";
 import Main from "../client/pages/Main";
 import Country from "../client/pages/country/country";
 import Genre from "../client/pages/genre/genre";
+import Login from "../client/pages/auth/login"
+import Register from "../client/pages/auth/registr";
+import ActivateUser from "../client/pages/activateUser/activateUser"
+import Actor from '../client/pages/actor/actor'
+import Type from "../client/pages/type/type";
+import Filmmaker from '../client/pages/filmmaker/filmmaker'
 
 const admin = {
   path: "admin",
@@ -119,6 +125,30 @@ const client = {
     {
       path: "/genres/:id",
       element: <Genre />,
+    },
+    {
+      path: "/types/:id",
+      element: <Type />,
+    },
+    {
+      path: "/actors/:id",
+      element: <Actor />,
+    },
+    {
+      path: "/filmmakers/:id",
+      element: <Filmmaker />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/register",
+      element: <Register />,
+    },
+    {
+      path: "/activate",
+      element: <ActivateUser />,
     },
   ],
 };

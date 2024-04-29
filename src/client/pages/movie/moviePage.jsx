@@ -28,6 +28,10 @@ const MoviePage = () => {
     dispatch(setMoviesDislikes({ id: movie._id }));
   };
 
+  const extractYear = (date) => {
+    return date.split("-")[0];
+  };
+
   return (
     <div>
       <Row>
@@ -48,11 +52,16 @@ const MoviePage = () => {
                   />
                 </div>
                 <div className="rating-users">
-                  <div onClick={setLikes} className="likes-rating">
-                    <BiSolidLike className="icon-like" /> {movie.likes}{" "}
+                  <div className="likes-rating">
+                    <BiSolidLike className="icon-like" onClick={setLikes} />{" "}
+                    {movie.likes}{" "}
                   </div>
-                  <div onClick={setDislikes} className="dislikes-rating">
-                    <BiSolidDislike className="icon-dislike" /> {movie.dislikes}{" "}
+                  <div className="dislikes-rating">
+                    <BiSolidDislike
+                      className="icon-dislike"
+                      onClick={setDislikes}
+                    />{" "}
+                    {movie.dislikes}{" "}
                   </div>
                 </div>
               </div>
@@ -64,7 +73,17 @@ const MoviePage = () => {
                   Country: <CustomLink data={movie.countries} href="country" />
                 </div>
                 <div>
-                  Genre: <CustomLink data={movie.genres} href='genres' />
+                  Genre: <CustomLink data={movie.genres} href="genres" />
+                </div>
+                <div>Year: {extractYear(movie.year)}</div>
+                <div>
+                  Type: <CustomLink data={movie.types} href="types" />
+                </div>
+                <div>
+                  Actors: <CustomLink data={movie.actors} href="actors" />
+                </div>
+                <div>
+                  Filmmaker: <CustomLink data={movie.filmmakers} href="filmmakers" />
                 </div>
               </div>
             </Col>

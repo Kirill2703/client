@@ -27,3 +27,8 @@ export const removeFilmmakers = createAsyncThunk(
     return { ...responce.data, _id: payload };
   }
 );
+
+export const getFilmmaker = createAsyncThunk("filmmakers.get", async (payload) => {
+  const responce = await api.get(`/filmmakers/${payload.id}`);
+  return responce.data;
+});

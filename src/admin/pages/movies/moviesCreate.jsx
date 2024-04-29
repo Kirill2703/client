@@ -7,6 +7,7 @@ import UploadImg from "./create/upload-img";
 import ItemsList from "./create/itemsList";
 import UploadGallery from "./create/uploadGallery";
 import dayjs from "dayjs";
+import TextArea from "antd/es/input/TextArea";
 
 const MoviesCreate = ({ initialValuesUpdate, functionSave }) => {
   const countries = useSelector((state) => state.countries.countries);
@@ -61,6 +62,7 @@ const MoviesCreate = ({ initialValuesUpdate, functionSave }) => {
     agerating: "14+",
     runtimes: "112 min",
     year: dayjs("2020"),
+    ratingIMDB: "IMDB rating"
   };
 
   useEffect(() => {
@@ -212,8 +214,12 @@ const MoviesCreate = ({ initialValuesUpdate, functionSave }) => {
         <Input />
       </Form.Item>
 
-      <Form.Item label="Runtimes" name="runtimes">
+      <Form.Item label="IMDB" name="ratingIMDB">
         <Input />
+      </Form.Item>
+
+      <Form.Item label="Description" name="description">
+        <TextArea />
       </Form.Item>
     </>
   );

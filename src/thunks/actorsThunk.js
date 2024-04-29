@@ -30,3 +30,9 @@ export const removeActors = createAsyncThunk(
     return { ...responce.data, _id: payload };
   }
 );
+
+export const getActor = createAsyncThunk("actors.get", async (payload) => {
+  const responce = await api.get(`/actors/${payload.id}`);
+  return responce.data;
+  
+});

@@ -29,3 +29,8 @@ export const removeTypes = createAsyncThunk(
     return { ...responce.data, _id: payload };
   }
 );
+
+export const getType = createAsyncThunk("types.get", async (payload) => {
+  const responce = await api.get(`/types/${payload.id}`);
+  return responce.data;
+});

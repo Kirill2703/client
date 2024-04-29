@@ -78,7 +78,7 @@ img {
 }
 
 .title-img {
-  margin-left: 20px;
+  display: flex;justify-content: center;
 }
 
 .information-block {
@@ -112,6 +112,46 @@ img {
 .icon-like:hover,
 .icon-dislike:hover{
   color: black;
+}
+
+.mainMenu{
+  display: flex;
+  justify-content: center;;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.movie .price{
+  background: red;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.6;
+  transform: translateY(100%);
+  transition: all 0.5s;
+}
+
+.price{
+  text-align: center;
+  font-weight: 700;
+}
+
+.movie:hover .price{
+ transform: translateY(0);
+}
+
+.currency{
+  display: flex;
+  gap: 20px;
+}
+
+.currency>div{
+  cursor: pointer;
+}
+
+.currency .active{
+  color: red;
 }
 
 
