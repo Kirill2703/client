@@ -14,7 +14,7 @@ const typeSlice = createSlice({
         state.types = action.payload;
       })
       .addCase(createTypes.fulfilled, (state, action) => {
-        state.genres.push(action.payload);
+        state.types.push(action.payload);
       })
       .addCase(updateTypes.fulfilled, (state, action) => {
         const { _id, title } = action.payload.payload;

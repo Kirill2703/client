@@ -15,7 +15,7 @@ const actorSlice = createSlice({
             state.actors = action.payload
             })
             .addCase(createActors.fulfilled, (state, action) => {
-            state.genres.push(action.payload)
+            state.actors.push(action.payload)
           })
           .addCase(updateActors.fulfilled, (state, action) => {
             const { _id, name, surname } = action.payload.payload;

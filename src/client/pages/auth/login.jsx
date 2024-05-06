@@ -30,60 +30,59 @@ const [api, contextHolder] = notification.useNotification();
 
     return (
       <div>
-        <h1>Login</h1>
-        <Form
-          name="basic"
-          
-          labelCol={{
-            span: 8,
-          }}
-          wrapperCol={{
-            span: 16,
-          }}
-          style={{
-            maxWidth: 600,
-          }}
-          onFinish={onFinish}
-          autoComplete="off"
-        >
-          <Form.Item
-            label="E-mail"
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: "Please input your e-mail!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-            ]}
-          >
-            <Input.Password />
-          </Form.Item>
-
-          <Form.Item
+        <div className='login-page'>
+          <h1>Login</h1>
+          <Form
+            name="basic"
+            labelCol={{
+              span: 8,
+            }}
             wrapperCol={{
-              offset: 8,
               span: 16,
             }}
+            style={{
+              maxWidth: 400,
+            }}
+            onFinish={onFinish}
+            autoComplete="off"
           >
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
-        </Form>
-        {contextHolder}
+            <Form.Item
+              label="E-mail"
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your e-mail!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your password!",
+                },
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+            <Form.Item
+              wrapperCol={{
+                offset: 8,
+                span: 16,
+              }}
+            >
+              <Button type="primary" htmlType="submit">
+                Log In
+              </Button>
+            </Form.Item>
+          </Form>
+          {contextHolder}
+        </div>
       </div>
     );
 }

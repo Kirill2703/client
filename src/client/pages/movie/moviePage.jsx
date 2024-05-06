@@ -3,22 +3,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import CustomLink from "./customLink";
 import { Col, Rate, Row } from "antd";
-import { BiSolidDislike, BiSolidLike } from "react-icons/bi";
+import { FrownOutlined,SmileOutlined   } from "@ant-design/icons";
 import { setMoviesDislikes, setMoviesLikes } from "../../../thunks/moviesThunk";
+import Slider from "./slider";
+import ModalTrailer from "../modal/modalTrailer";
+import ShowActors from "./actors/showActors";
+
+
 
 const MoviePage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const movies = useSelector((state) => state.movies.movies);
   const [movie, setmovie] = useState("");
+  const [relatedMovies, setRelatedMovies] = useState("");
 
   useEffect(() => {
-    setmovie(movies.find((m) => m._id === id));
+    const currentMovie = movies.find((m) => m._id === id);
+    setmovie(currentMovie);
+
+    // const movieWithSameGenre = movies.filter(
+    //   (m) => m.genre === currentMovie.genre && m._id !== id
+    // );
+    // setRelatedMovies(movieWithSameGenre)
   }, [id, movies]);
 
   if (movies.length === 0 || !movie) {
     return "Loading...";
   }
+
 
   const setLikes = () => {
     dispatch(setMoviesLikes({ id: movie._id }));
@@ -34,62 +47,95 @@ const MoviePage = () => {
 
   return (
     <div>
-      <Row>
-        <Col span={20}>
-          <h1 className="title">{movie.title}</h1>
-          <Row>
-            <Col span={12}>
-              <div className="title-img">
-                <img src={movie.img} alt={movie.title} />
-              </div>
-
-              <div className="rating">
-                <div>
-                  <Rate
-                    disabled
-                    allowHalf
-                    value={(movie.likes * 5) / (movie.likes + movie.dislikes)}
-                  />
-                </div>
-                <div className="rating-users">
-                  <div className="likes-rating">
-                    <BiSolidLike className="icon-like" onClick={setLikes} />{" "}
-                    {movie.likes}{" "}
+      <div className="pg-movie">
+        <Row>
+          <Col span={24}>
+            <div className="slider-relative">
+              <Slider />
+              <Row>
+                <Col span={12}>
+                  <div className="main-information">
+                    <div className="title-ratings">
+                      <div className="poster">
+                        <img src={movie.img} alt={movie.title} />
+                        <p>
+                          <Rate
+                            disabled
+                            allowHalf
+                            value={
+                              (movie.likes * 5) / (movie.likes + movie.dislikes)
+                            }
+                          />
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="dislikes-rating">
-                    <BiSolidDislike
-                      className="icon-dislike"
-                      onClick={setDislikes}
-                    />{" "}
-                    {movie.dislikes}{" "}
-                  </div>
-                </div>
-              </div>
-            </Col>
+                </Col>
 
-            <Col span={12}>
-              <div className="information-block">
-                <div>
-                  Country: <CustomLink data={movie.countries} href="country" />
-                </div>
-                <div>
-                  Genre: <CustomLink data={movie.genres} href="genres" />
-                </div>
-                <div>Year: {extractYear(movie.year)}</div>
-                <div>
-                  Type: <CustomLink data={movie.types} href="types" />
-                </div>
-                <div>
-                  Actors: <CustomLink data={movie.actors} href="actors" />
-                </div>
-                <div>
-                  Filmmaker: <CustomLink data={movie.filmmakers} href="filmmakers" />
-                </div>
-              </div>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+                <Col span={12}>
+                  <div className="information-block">
+                    <h1>{movie.title}</h1>
+
+                    <div className="sml-info">
+                      <div>
+                        <CustomLink data={movie.countries} href="country" />
+                      </div>
+                      <div>
+                        <CustomLink data={movie.genres} href="genres" />
+                      </div>
+                      <div>{extractYear(movie.year)}</div>
+                      <div>{movie.agerating}</div>
+                      <div>{movie.runtimes}</div>
+                      <div>{movie.ratingIMDB}</div>
+                      {/* <div>
+                        <CustomLink data={movie.types} href="types" />
+                      </div>
+                      <div>
+                        <CustomLink data={movie.actors} href="actors" />
+                      </div>
+                      <div>
+                        <CustomLink data={movie.filmmakers} href="filmmakers" />
+                      </div> */}
+                    </div>
+                    <div>{movie.description}</div>
+                    <div className="rating-users">
+                      <div className="likes-rating">
+                        <SmileOutlined
+                          className="icon-like"
+                          onClick={setLikes}
+                        />
+                        {movie.likes}
+                      </div>
+                      <div className="dislikes-rating">
+                        <FrownOutlined
+                          className="icon-dislike"
+                          onClick={setDislikes}
+                        />
+                        {movie.dislikes}
+                      </div>
+                    </div>
+                    <div className="modal-trailer">
+                      <ModalTrailer />
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+            </div>
+            <div>
+            </div>
+          </Col>
+        </Row>
+        {/* <Row>
+          <Col span={24}>
+            <div>
+              {relatedMovies.map((relatedMovie) => <div key={relatedMovie._id}>
+                <img src={relatedMovie.img} alt={relatedMovie.title} />
+                <h3>{relatedMovie.title}</h3>
+              </div>)}
+            </div>
+          </Col>
+        </Row> */}
+      </div>
     </div>
   );
 };

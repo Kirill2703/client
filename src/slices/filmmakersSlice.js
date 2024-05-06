@@ -14,7 +14,7 @@ const filmmakerSlice = createSlice({
       state.filmmakers = action.payload;
       })
     .addCase(createFilmmakers.fulfilled, (state, action) => {
-            state.genres.push(action.payload)
+            state.filmmakers.push(action.payload)
           })
           .addCase(updateFilmmakers.fulfilled, (state, action) => {
             const { _id, name, surname } = action.payload.payload;

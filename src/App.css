@@ -1,5 +1,7 @@
 body {
   margin: 0;
+  background-color: #333;
+  color: aliceblue;
 }
 
 img {
@@ -37,8 +39,82 @@ img {
   height: auto !important;
 }
 
-.container {
+/* page-Movie */
+
+.main-information {
+  position: absolute;
+  bottom: 50px;
+  left: 100px;
   overflow: hidden;
+}
+
+.poster {
+  width: 35%;
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 40px 0;
+}
+
+.poster p {
+  text-align: center;
+  padding: 8px 0;
+}
+
+
+.information-block {
+  position: absolute;
+  bottom: 80px;
+  left: -200px;
+  width: 80%;
+}
+
+.information-block div {
+  margin-bottom: 20px;
+  display: inline-block;
+  text-align: justify;
+}
+
+.sml-info {
+  display: flex;
+}
+
+.sml-info div {
+  padding: 0 8px;
+}
+
+.sml-info div:not(:first-child) {
+  border-left: #ddd solid 1px;
+}
+
+.sml-info div:nth-child(1) {
+  padding-left: 0;
+}
+
+.rating-users{
+  font-size: 18px;
+}
+.dislikes-rating {
+  margin-left: 30px;
+}
+
+.icon-like,
+.icon-dislike {
+  color: #a89595;
+  font-size: 20px;
+  cursor: pointer;
+  vertical-align: middle;
+  padding-right: 6px;
+}
+
+.icon-like:hover {
+  color: green;
+}
+.icon-dislike:hover{
+  color: red;
+}
+
+.modal-trailer{
+  margin-left: 50px;
 }
 
 .genre {
@@ -64,10 +140,6 @@ img {
   margin-right: 5px;
 }
 
-.title {
-  text-align: center;
-}
-
 .all-movies {
   display: flex;
   gap: 20px;
@@ -77,51 +149,14 @@ img {
   text-align: center;
 }
 
-.title-img {
-  display: flex;justify-content: center;
-}
-
-.information-block {
-  text-align: center;
-}
-
-.rating {
-  text-align: center;
-  margin-top: 40px;
-}
-
-.rating-users {
+.mainMenu {
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  font-size: 16px;
-}
-
-.dislikes-rating {
-  margin-left: 50px;
-}
-
-.icon-like,
-.icon-dislike {
-  color: #777;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.icon-like:hover,
-.icon-dislike:hover{
-  color: black;
-}
-
-.mainMenu{
-  display: flex;
-  justify-content: center;;
   gap: 20px;
   padding: 20px 0;
 }
 
-.movie .price{
+.movie .price {
   background: red;
   position: absolute;
   bottom: 0;
@@ -132,26 +167,30 @@ img {
   transition: all 0.5s;
 }
 
-.price{
+.price {
   text-align: center;
   font-weight: 700;
 }
 
-.movie:hover .price{
- transform: translateY(0);
+.movie:hover .price {
+  transform: translateY(0);
 }
 
-.currency{
+.currency {
   display: flex;
   gap: 20px;
 }
 
-.currency>div{
+.currency > div {
   cursor: pointer;
 }
 
-.currency .active{
+.currency .active {
   color: red;
 }
 
+
+/* login-page */
+
+.login-page{}
 

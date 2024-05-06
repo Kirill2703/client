@@ -3,14 +3,14 @@ import MenuClient from './menu/menuClient';
 import { Outlet } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { allMovies } from '../../thunks/moviesThunk';
-import { getCurrency } from '../../thunks/currencyThunk';
+// import { getCurrency } from '../../thunks/currencyThunk';
 
 const Main = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(allMovies());
-    dispatch(getCurrency())
+    // dispatch(getCurrency())
   }, []);
     return (
       <div>

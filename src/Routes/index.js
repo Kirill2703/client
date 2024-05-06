@@ -28,6 +28,7 @@ import ActivateUser from "../client/pages/activateUser/activateUser"
 import Actor from '../client/pages/actor/actor'
 import Type from "../client/pages/type/type";
 import Filmmaker from '../client/pages/filmmaker/filmmaker'
+import Search from "../client/pages/search/search";
 
 const admin = {
   path: "admin",
@@ -149,6 +150,10 @@ const client = {
     {
       path: "/activate",
       element: <ActivateUser />,
+    },
+    {
+      path: "/search",
+      element: <Search />,
     },
   ],
 };

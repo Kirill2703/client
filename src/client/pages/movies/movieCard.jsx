@@ -43,7 +43,7 @@ const MovieCard = ({ movie }) => {
         <div>
           <div>
             {extractYear(movie.year)},
-            {movie.genres.map((genre) => genre.title).join(", &nbsp;")},
+            {movie.genres.map((genre) => genre.title).join(", ")},
             {movie.countries.map((country) => country.title).join(", ")}
           </div>
           <div className="genre">
