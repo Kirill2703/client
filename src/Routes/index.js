@@ -25,10 +25,12 @@ import Genre from "../client/pages/genre/genre";
 import Login from "../client/pages/auth/login"
 import Register from "../client/pages/auth/registr";
 import ActivateUser from "../client/pages/activateUser/activateUser"
-import Actor from '../client/pages/actor/actor'
+// import Actor from '../client/pages/actor/actor'
 import Type from "../client/pages/type/type";
 import Filmmaker from '../client/pages/filmmaker/filmmaker'
 import Search from "../client/pages/search/search";
+import RecoverPassword from "../client/pages/auth/recoverPassword";
+import CheckMail from "../client/pages/auth/checkMail";
 
 const admin = {
   path: "admin",
@@ -131,10 +133,10 @@ const client = {
       path: "/types/:id",
       element: <Type />,
     },
-    {
-      path: "/actors/:id",
-      element: <Actor />,
-    },
+    // {
+    //   path: "/actors/:id",
+    //   element: <Actor />,
+    // },
     {
       path: "/filmmakers/:id",
       element: <Filmmaker />,
@@ -147,6 +149,16 @@ const client = {
       path: "/register",
       element: <Register />,
     },
+    {
+      path: "/recover-password",
+      element: <RecoverPassword /> 
+    },
+
+    {
+      path: "/check-your-email", 
+      element: <CheckMail />
+    },
+    
     {
       path: "/activate",
       element: <ActivateUser />,

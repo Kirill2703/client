@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { updateActors } from "../../../thunks/actorsThunk";
+import PhotoActor from "./photoActor";
 
 const ActorsUpdate = () => {
   const dispatch = useDispatch();

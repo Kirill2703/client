@@ -24,6 +24,16 @@ export const login= createAsyncThunk(
   }
 );
 
+// export const recoverPassword = createAsyncThunk("recover", async (payload, { rejectWithValue }) => {
+//   try {
+//     const response = await api.post('/recover-password', payload);
+//     return response.data
+//   }
+//   catch (error) {
+//     return rejectWithValue(error.response.data)
+//   }
+// })
+
 export const getAuthUser = createAsyncThunk(
   "getAuthUser",
   async (payload, { rejectWithValue }) => {

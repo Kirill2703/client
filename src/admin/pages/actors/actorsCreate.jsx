@@ -1,20 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form, Input } from "antd";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {createActors} from "../../../thunks/actorsThunk"
+import PhotoActor from './photoActor';
 
 
 const ActorsCreate = () => {
    const dispatch = useDispatch();
    const [form] = Form.useForm();
-   const navigate = useNavigate();
+  const navigate = useNavigate();
 
+  const [photoActor, setphotoActor] = useState(null);
+  
    const onFinish = (values) => {
      dispatch(createActors(values));
      form.resetFields();
      navigate("/admin/actors");
-   };
+  };
+  
+  useEffect(() => {
+    setphotoActor(form.getFieldValue('photoActor'))
+    return () => {
+      
+    };
+  }, []);
     return (
       <div>
         <h1>Add Actor</h1>
@@ -58,6 +68,10 @@ const ActorsCreate = () => {
             ]}
           >
             <Input />
+          </Form.Item>
+
+          <Form.Item label="Photo" name="Photo">
+            <PhotoActor form={form} img={photoActor} />
           </Form.Item>
 
           <Form.Item

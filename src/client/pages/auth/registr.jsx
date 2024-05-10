@@ -1,13 +1,12 @@
 import { Button, Input } from "antd";
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { Form } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { register } from "../../../thunks/authThunk"
 import { useNavigate } from "react-router-dom";
-import useSelection from "antd/es/table/hooks/useSelection";
 
 const Registr = () => {
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -15,7 +14,7 @@ const Registr = () => {
 
   const onFinish = async (values) => {
     try {
-      const responce = await dispath(register(values));
+      const responce = await dispatch(register(values));
       if (responce.payload.email) {
         navigate('/login')
       }

@@ -1,7 +1,7 @@
 import { Button, Form, Input, notification } from 'antd';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { login } from "../../../thunks/authThunk";
 
 const Login = () => {
@@ -76,9 +76,15 @@ const [api, contextHolder] = notification.useNotification();
                 span: 16,
               }}
             >
-              <Button type="primary" htmlType="submit">
-                Log In
-              </Button>
+
+              <div style={{display: 'flex', flexDirection: "column", gap: "20px"}}>
+                <Link to="/recover-password">
+                  Forgot password?
+                </Link>
+                <Button type="primary" htmlType="submit">
+                  Log In
+                </Button>
+              </div>
             </Form.Item>
           </Form>
           {contextHolder}

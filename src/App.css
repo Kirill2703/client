@@ -40,19 +40,28 @@ img {
 }
 
 /* page-Movie */
+.movie-information{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h1{
+  margin-top: 0;
+}
 
 .main-information {
-  position: absolute;
-  bottom: 50px;
-  left: 100px;
   overflow: hidden;
 }
 
 .poster {
-  width: 35%;
   border-radius: 16px;
   overflow: hidden;
-  margin: 40px 0;
 }
 
 .poster p {
@@ -60,11 +69,12 @@ img {
   padding: 8px 0;
 }
 
+.rating{
+  text-align: center;
+  margin-top: 20px;
+}
 
 .information-block {
-  position: absolute;
-  bottom: 80px;
-  left: -200px;
   width: 80%;
 }
 
@@ -90,7 +100,7 @@ img {
   padding-left: 0;
 }
 
-.rating-users{
+.rating-users {
   font-size: 18px;
 }
 .dislikes-rating {
@@ -109,11 +119,11 @@ img {
 .icon-like:hover {
   color: green;
 }
-.icon-dislike:hover{
+.icon-dislike:hover {
   color: red;
 }
 
-.modal-trailer{
+.modal-trailer {
   margin-left: 50px;
 }
 
@@ -150,10 +160,13 @@ img {
 }
 
 .mainMenu {
+  position: sticky;
+  z-index: 100;
   display: flex;
   justify-content: center;
   gap: 20px;
   padding: 20px 0;
+  top: 0;
 }
 
 .movie .price {
@@ -189,8 +202,31 @@ img {
   color: red;
 }
 
-
 /* login-page */
 
-.login-page{}
+.slider-relative {
+  position: relative;
+  margin-top: -80px;
+}
 
+.slider-relative::after {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  background: rgb(51, 51, 51);
+  background: linear-gradient(
+    0deg,
+    rgba(51, 51, 51, 1) 2%,
+    rgba(51, 51, 51, 0) 25%,
+    rgba(51, 51, 51, 0) 75%,
+    rgba(51, 51, 51, 1) 98%
+  );
+  pointer-events: none;
+}
+
+.mainMenu.scroll{
+background-color: violet;
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logout } from "../../../thunks/authThunk";
@@ -12,12 +12,24 @@ import { PoweroffOutlined } from "@ant-design/icons";
 
 const MenuClient = () => {
   const auth = useSelector((state) => state.auth);
+  const [scroll, setScroll] = useState(false)
+  const header = useRef()
   
   const dispatch = useDispatch();
 
   const logoutClickHandler = () => {
     dispatch(logout());
   };
+
+  useEffect(() => {
+    window.addEventListener("scroll", (e) => {
+      if (window.scrollY > 80) {
+        setScroll(true);
+      } else {
+        setScroll(false);
+      }
+    })
+  }, []);
 
   const authUser = (
     <div className="menu-auth">
@@ -38,16 +50,16 @@ const MenuClient = () => {
     </div>
   );
 
-  
 
   return (
-    <div className="mainMenu">
-      <NavLink to="/" className="menu-link">Home</NavLink>
+    <div className={`mainMenu ${scroll ? "scroll" : ""}`} ref={header}>
+      <NavLink to="/" className="menu-link">
+        Home
+      </NavLink>
       {auth.token ? authUser : guestUser}
       {/* <Currency /> */}
 
       <SearchMovie />
-      
     </div>
   );
 };

@@ -8,8 +8,6 @@ import ItemsList from "./create/itemsList";
 import UploadGallery from "./create/uploadGallery";
 import dayjs from "dayjs";
 import TextArea from "antd/es/input/TextArea";
-import UploadPhotoActor from "./create/uploadPhotoActor";
-import UploadPhotoFilmmaker from "./create/uploadPhotoFilmmaker";
 
 const MoviesCreate = ({ initialValuesUpdate, functionSave }) => {
   const countries = useSelector((state) => state.countries.countries);
@@ -20,8 +18,6 @@ const MoviesCreate = ({ initialValuesUpdate, functionSave }) => {
 
   const [filmImage, setfilmImage] = useState(null);
   const [filmGallery, setfilmGallery] = useState(null);
-  const [photoActor, setphotoActor] = useState(null);
-  const [photoFilmmaker, setphotoFilmmaker] = useState(null);
   
 
   const dispatch = useDispatch();
@@ -74,8 +70,6 @@ const MoviesCreate = ({ initialValuesUpdate, functionSave }) => {
     form.setFieldsValue(initialValuesUpdate || initialValues);
     setfilmImage(form.getFieldValue("img"));
     setfilmGallery(form.getFieldValue("gallery"));
-    setphotoActor(form.getFieldValue('actorPhoto'))
-    setphotoFilmmaker(form.getFieldValue('filmmakerPhoto'))
   }, [initialValuesUpdate]);
 
   const tab1 = (
@@ -191,14 +185,6 @@ const MoviesCreate = ({ initialValuesUpdate, functionSave }) => {
     <>
       <Form.Item label="Gallery" name="gallery">
         <UploadGallery form={form} images={filmGallery} />
-      </Form.Item>
-
-      <Form.Item label="Actor Photo" name="actorPhoto">
-        <UploadPhotoActor form={form} images={photoActor} />
-      </Form.Item>
-
-      <Form.Item label="Filmmaker Photo" name="filmmakerPhoto">
-        <UploadPhotoFilmmaker form={form} images={photoFilmmaker} />
       </Form.Item>
 
       <Form.Item label="Trailer" name="trailer">
