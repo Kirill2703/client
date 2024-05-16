@@ -7,9 +7,9 @@ const { Dragger } = Upload;
 const PhotoActor = ({form, img}) => {
     const [file, setFile] = useState(img);
     const onFileChange = (fileList) => {
-      setFile([fileList[0].file]);
+      setFile([fileList.file]);
       form.setFieldValue(
-        "img",
+        "actorPhoto",
         "http://127.0.0.1:4000/uploads/" + fileList.file.name
       );
     };

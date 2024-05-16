@@ -1,7 +1,7 @@
 body {
-  margin: 0;
-  background-color: #333;
-  color: aliceblue;
+  background-color: #3d3d3d;
+  margin: 0px;
+  font-family: "Lato";
 }
 
 img {
@@ -40,7 +40,7 @@ img {
 }
 
 /* page-Movie */
-.movie-information{
+.movie-information {
   position: absolute;
   top: 0;
   left: 0;
@@ -48,15 +48,12 @@ img {
   right: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  width: 80%;
+  margin: auto;
 }
 
-h1{
+h1 {
   margin-top: 0;
-}
-
-.main-information {
-  overflow: hidden;
 }
 
 .poster {
@@ -69,7 +66,7 @@ h1{
   padding: 8px 0;
 }
 
-.rating{
+.rating {
   text-align: center;
   margin-top: 20px;
 }
@@ -78,10 +75,9 @@ h1{
   width: 80%;
 }
 
-.information-block div {
-  margin-bottom: 20px;
-  display: inline-block;
+.despription {
   text-align: justify;
+  padding-top: 16px;
 }
 
 .sml-info {
@@ -102,6 +98,7 @@ h1{
 
 .rating-users {
   font-size: 18px;
+  display: flex;
 }
 .dislikes-rating {
   margin-left: 30px;
@@ -127,38 +124,130 @@ h1{
   margin-left: 50px;
 }
 
-.genre {
-  border: 1px solid #333;
-  background-color: #333;
-  width: 40%;
-  color: #ddd;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  opacity: 0.7;
+.btm-info {
+  padding: 0 80px;
 }
 
-.movie {
-  position: relative;
-}
-
-.genre span {
-  margin-right: 5px;
-}
-
+/* home-page */
 .all-movies {
   display: flex;
+  justify-content: center;
+  margin: 0 80px;
   gap: 20px;
 }
 
-.title {
-  text-align: center;
+/* movie-card */
+.card {
+  width: 240px;
+  height: 360px;
 }
 
+.card img {
+  height: 100%;
+}
+
+.card{
+    flex: 1;
+    flex-basis: 300px;
+    flex-grow: 0;
+    height: 440px;
+    background: #fff;
+    border: 2px solid #fff;
+    box-shadow: 0px 4px 7px rgba(0,0,0,.5);
+    cursor: pointer;
+    transition: all .5s cubic-bezier(.8,.5,.2,1.4);
+    overflow: hidden;
+    position: relative;
+}
+.card img{
+    width: 100%;
+    height:100%;
+    transition: all .5s cubic-bezier(.8,.5,.2,1.4);
+}
+.descriptions{
+    position: absolute;
+    top:0px;
+    left:0px;
+    height: 100%;
+    width:100%;
+    background-color: rgba(255,255,255,.7);
+    transition: all .7s ease-in-out;
+    padding: 20px;
+    box-sizing: border-box;
+    clip-path: circle(0% at 100% 100%);
+    color: black;
+}
+
+.descriptions p{
+  text-align: justify;
+}
+.card:hover .descriptions{
+    left:0px;
+    transition: all .7s ease-in-out;
+    clip-path: circle(75%);
+}
+.card:hover{
+    transition: all .5s cubic-bezier(.8,.5,.2,1.4);
+    box-shadow: 0px 2px 3px rgba(0,0,0,.3);
+    transform: scale(.97);
+}
+.card:hover img{
+    transition: all .5s cubic-bezier(.8,.5,.2,1.4);
+    transform: scale(1.6) rotate(20deg);
+    filter: blur(3px);
+}
+.card h1{
+    color: #ff3838;
+    letter-spacing: 1px;
+    margin: 0px;
+}
+
+
+
+
+/* related-block-movies */
+
+.scrool-tray{
+  white-space: nowrap;
+}
+
+.scrool-tray div{
+  display: inline-block;
+}
+
+.scrool-tray img{
+  border-radius: 0.3em;
+  margin: 7px 5px;
+  padding: 0;
+  width: 340px;
+  height: 200px;
+}
+
+.scrool-holder{
+ overflow: hidden; 
+}
+
+.scrool-holder .scrool-tray:first-child{
+  animation: scrool-tray-hero 180s linear infinite;
+}
+
+.scrool-holder .scrool-tray:last-child{
+  animation: scrool-tray-hero 120s linear infinite;
+}
+
+@keyframes scrool-tray-hero{
+  0%{
+    transform: translateX(0);
+  }
+  99.99%{
+    transform: translateX(-7098px);
+  }
+  100%{
+    transform: translateX(0);
+  }
+}
+
+/*header */
 .mainMenu {
   position: sticky;
   z-index: 100;
@@ -167,26 +256,6 @@ h1{
   gap: 20px;
   padding: 20px 0;
   top: 0;
-}
-
-.movie .price {
-  background: red;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  opacity: 0.6;
-  transform: translateY(100%);
-  transition: all 0.5s;
-}
-
-.price {
-  text-align: center;
-  font-weight: 700;
-}
-
-.movie:hover .price {
-  transform: translateY(0);
 }
 
 .currency {
@@ -227,6 +296,29 @@ h1{
   pointer-events: none;
 }
 
-.mainMenu.scroll{
-background-color: violet;
+.mainMenu.scroll {
+  background-color: violet;
+}
+
+/* Show actors */
+
+.custom-prev-arrow,
+.custom-next-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.custom-prev-arrow {
+  left: 0;
+  font-size: 24px;
+  color: #777;
+}
+
+.custom-next-arrow {
+  right: 0;
+  font-size: 24px;
+  color: #777;
 }

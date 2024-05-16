@@ -18,11 +18,10 @@ const actorSlice = createSlice({
             state.actors.push(action.payload)
           })
           .addCase(updateActors.fulfilled, (state, action) => {
-            const { _id, name, surname, photo } = action.payload.payload;
+            const { _id, name, surname } = action.payload.payload;
             const actor = state.actors.find((a) => a._id === _id);
               actor.name = name;
             actor.surname = surname;
-            actor.photo = photo
             
             
           })

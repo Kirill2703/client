@@ -19,17 +19,28 @@ const Slider = () => {
   }
     return (
       <div>
-        <Carousel autoplay>
-          {movie.gallery.map((image) => (
-            <div key={movie._id}>
-              <img
-                src={image}
-                alt=""
-                style={{ width: "120%", height: "100vh", objectFit: "cover", opacity: "0.2" }}
-              />
-            </div>
-          ))}
-        </Carousel>
+        {movie.gallery.length === 0 ? (
+          <Carousel autoplay>
+            <img src="https://static0.srcdn.com/wordpress/wp-content/uploads/2023/11/greatest-movies-of-all-time.jpg"></img>
+          </Carousel>
+        ) : (
+          <Carousel autoplay>
+            {movie.gallery.map((image) => (
+              <div key={movie._id}>
+                <img
+                  src={image}
+                  alt=""
+                  style={{
+                    width: "120%",
+                    height: "100vh",
+                    objectFit: "cover",
+                    opacity: "0.2",
+                  }}
+                />
+              </div>
+            ))}
+          </Carousel>
+        )}
       </div>
     );
 }

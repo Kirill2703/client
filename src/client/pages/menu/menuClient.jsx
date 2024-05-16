@@ -34,6 +34,7 @@ const MenuClient = () => {
   const authUser = (
     <div className="menu-auth">
       <span className="welcome-text">Welcome, {auth.userData.name}</span>
+      <NavLink to="subscribes"> My subscribes</NavLink>
       {/* <button onClick={logoutClickHandler}></button> */}
       <Button
         type="primary"
@@ -60,6 +61,8 @@ const MenuClient = () => {
       {/* <Currency /> */}
 
       <SearchMovie />
+
+
     </div>
   );
 };

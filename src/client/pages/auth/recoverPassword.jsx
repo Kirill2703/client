@@ -10,16 +10,16 @@ const RecoverPassword = () => {
 
     const [error, seterror] = useState(null);
 
-    // const onFinish = async (values) => {
-    //   try {
-    //     const responce = await dispatch(recoverPassword(values));
-    //     if (responce.payload.email) {
-    //       navigate("/check-your-email");
-    //     } else {
-    //       seterror(responce.payload.message);
-    //     }
-    //   } catch (error) {}
-    // };
+    const onFinish = async (values) => {
+      try {
+        const responce = await dispatch(recoverPassword(values));
+        if (responce.payload.status === "success") {
+          navigate("/check-your-email");
+        } else {
+          seterror(responce.payload.message);
+        }
+      } catch (error) {}
+    };
     return (
       <div>
         <h1 style={{ textAlign: "center" }}>Recover Password</h1>
@@ -35,7 +35,7 @@ const RecoverPassword = () => {
           style={{
             maxWidth: 400,
           }}
-        //   onFinish={onFinish}
+            onFinish={onFinish}
           autoComplete="off"
         >
           <Form.Item
@@ -49,6 +49,14 @@ const RecoverPassword = () => {
             ]}
           >
             <Input placeholder="Input your e-mail" />
+          </Form.Item>
+
+          <Form.Item
+            wrapperCol={{
+              offset: 8,
+              span: 16,
+            }}
+          >
             <Button type="primary" htmlType="submit">
               Submit
             </Button>

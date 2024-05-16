@@ -31,6 +31,9 @@ import Filmmaker from '../client/pages/filmmaker/filmmaker'
 import Search from "../client/pages/search/search";
 import RecoverPassword from "../client/pages/auth/recoverPassword";
 import CheckMail from "../client/pages/auth/checkMail";
+import ChangePassword from "../client/pages/auth/changePassword";
+import Subscribe from "../client/pages/subscribe/subscribe";
+import Actor from "../client/pages/actor/actor";
 
 const admin = {
   path: "admin",
@@ -133,10 +136,10 @@ const client = {
       path: "/types/:id",
       element: <Type />,
     },
-    // {
-    //   path: "/actors/:id",
-    //   element: <Actor />,
-    // },
+    {
+      path: "/actors/:id",
+      element: <Actor />,
+    },
     {
       path: "/filmmakers/:id",
       element: <Filmmaker />,
@@ -151,14 +154,18 @@ const client = {
     },
     {
       path: "/recover-password",
-      element: <RecoverPassword /> 
+      element: <RecoverPassword />,
     },
 
     {
-      path: "/check-your-email", 
-      element: <CheckMail />
+      path: "/check-your-email",
+      element: <CheckMail />,
     },
-    
+    {
+      path: "/change-password",
+      element: <ChangePassword />,
+    },
+
     {
       path: "/activate",
       element: <ActivateUser />,
@@ -166,6 +173,10 @@ const client = {
     {
       path: "/search",
       element: <Search />,
+    },
+    {
+      path: "/subscribes",
+      element: <Subscribe />,
     },
   ],
 };

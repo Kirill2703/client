@@ -13,7 +13,8 @@ const ActorsCreate = () => {
 
   const [photoActor, setphotoActor] = useState(null);
   
-   const onFinish = (values) => {
+  const onFinish = (values) => {
+     console.log(values);
      dispatch(createActors(values));
      form.resetFields();
      navigate("/admin/actors");
@@ -70,7 +71,7 @@ const ActorsCreate = () => {
             <Input />
           </Form.Item>
 
-          <Form.Item label="Photo" name="Photo">
+          <Form.Item label="Photo" name="actorPhoto">
             <PhotoActor form={form} img={photoActor} />
           </Form.Item>
 
