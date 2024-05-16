@@ -11,7 +11,7 @@ const ShowActors = ({ movie }) => {
     dots: false,
     infinite: true,
     speed: 300,
-    slidesToShow: 5,
+    slidesToShow: movie.actors.length >= 5 ? 5: movie.actors.length,
     slidesToScroll: 1,
     responsive: [
       {

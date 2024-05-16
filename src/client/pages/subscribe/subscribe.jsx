@@ -9,30 +9,34 @@ const Subscribe = () => {
 
   useEffect(() => {
     getSubscribe();
-  }, []);
+  }, [auth]);
 
   const getSubscribe = async () => {
-    const responce = await dispatch(getSubscribeUser(auth.userData._id));
-    // setSubscribes(responce.payload);
+    if(auth.userData._id){
+      const responce = await dispatch(getSubscribeUser(auth.userData._id));
+      setSubscribes(responce.payload);
+    }
     };
     
     const showSubscribes = () => (
       <div>
         {subscribes.map((s) => (
           <div>
-            <div>{s.user._id}</div>
-                <div>{s.date}</div>
-                <div>{s.summa}</div>
+            <div>
+              {new Date (s.date).toLocaleDateString()} : {s.summa}
+            </div>
+            <div></div>
           </div>
         ))}
       </div>
     );
 
     const paySubscribe = async () => {
-        // const responce = await dispatch(setSubscribeUser({ user_id: auth.userData._id, summa: 50 }));
-        // // setSubscribes([...subscribes, responce.payload])
-        // console.log(responce);
-    }
+        const responce = await dispatch(setSubscribeUser({ user_id: auth.userData._id, summa: 50 }));
+        setSubscribes([...subscribes, responce.payload])
+        console.log(responce);
+  }
+  
 
   return (
     <div>

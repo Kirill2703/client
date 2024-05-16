@@ -40,7 +40,7 @@ export const authSlices = createSlice({
       })
       .addCase(getAuthUser.rejected, (state, action) => {
         state.loading = "rejected";
-        state.error = action.payload.message;
+        // state.error = action.payload.message;
       })
 
       .addCase(logout.fulfilled, (state) => {
