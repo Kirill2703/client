@@ -231,18 +231,18 @@ h1 {
 }
 
 .scrool-holder {
-  --count: 5;
+  --count: 10;
   overflow: hidden;
   width: min(100%, calc(340px * var(--count)));
   margin: auto;
 }
 
 .scrool-holder .scrool-tray:first-child {
-  animation: scrool-tray-hero 30s linear infinite;
+  animation: scrool-tray-hero 60s linear infinite;
 }
 
 .scrool-holder .scrool-tray:last-child {
-  animation: scrool-tray-hero 20s linear infinite;
+  animation: scrool-tray-hero 40s linear infinite;
 }
 
 @keyframes scrool-tray-hero {
