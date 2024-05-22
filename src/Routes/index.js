@@ -34,6 +34,10 @@ import CheckMail from "../client/pages/auth/checkMail";
 import ChangePassword from "../client/pages/auth/changePassword";
 import Subscribe from "../client/pages/subscribe/subscribe";
 import Actor from "../client/pages/actor/actor";
+import AllFilms from "../client/pages/allFilms/allFilms";
+import AllSerials from "../client/pages/allSerial/allSerials";
+import ForChildren from "../client/pages/forChildren/forChildren";
+import TypeOfSubscribe from "../client/pages/typeOfSubscribe/typeOfSubscribe";
 
 const admin = {
   path: "admin",
@@ -177,6 +181,22 @@ const client = {
     {
       path: "/subscribes",
       element: <Subscribe />,
+    },
+    {
+      path: "/films",
+      element: <AllFilms />,
+    },
+    {
+      path: "/serials",
+      element: <AllSerials />,
+    },
+    {
+      path: "/forchildrens",
+      element: <ForChildren />,
+    },
+    {
+      path: "/subscribes-type",
+      element: <TypeOfSubscribe />,
     },
   ],
 };

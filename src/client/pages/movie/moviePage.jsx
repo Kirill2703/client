@@ -36,6 +36,8 @@ const MoviePage = () => {
     getSubscribe();
   }, [auth]);
 
+  
+
 
   const getSubscribe = async () => {
     if (auth.userData._id) {

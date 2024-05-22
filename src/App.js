@@ -13,9 +13,9 @@ function App() {
       dispatch(getAuthUser());
     }
   }, []);
-  return <div>
+  return <>
     <Outlet />
-  </div>;
+  </>;
 }
 
 export default App;

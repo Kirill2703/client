@@ -1,23 +1,11 @@
 import { AutoComplete, Space } from "antd";
 import React, { useState } from "react";
-import { AudioOutlined } from "@ant-design/icons";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import Search from "antd/es/input/Search";
-import useSelection from "antd/es/table/hooks/useSelection";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
-const suffix = (
-  <AudioOutlined
-    style={{
-      fontSize: 16,
-      color: "#1677ff",
-    }}
-  />
-);
+import { SearchOutlined } from "@ant-design/icons";
 
 const SearchMovie = () => {
   const [searchMovie, setsearchMovie] = useState("");
-  const [searchParams, setSearchParams] = useSearchParams();
   const [options, setOptions] = useState([]);
   const navigate = useNavigate();
   const movies = useSelector((state) => state.movies.movies);
@@ -33,34 +21,36 @@ const SearchMovie = () => {
     const searchSetMovie = (movie) => {
       const reg = new RegExp(query, "i");
       return reg.test(movie.title);
+    };
+
+    if (movies.filter(searchSetMovie).length === 0) {
+      return [
+        {
+          value: "",
+          label: <div>Nothing found</div>,
+        },
+      ];
+    }
+    return movies.filter(searchSetMovie).map((movie) => {
+      return {
+        value: movie._id,
+        label: (
+          <div>
+            <Link to={`/movie/${movie._id}`}>
+              <div>{movie.title}</div>
+            </Link>
+          </div>
+        ),
       };
-      
-      if (movies.filter(searchSetMovie).length === 0) {
-          return [{
-              value: '',
-              label: <div>Nothing found</div>
-          }]
-      }
-        return movies.filter(searchSetMovie).map((movie) => {
-          return {
-            value: movie._id,
-            label: (
-              <div>
-                <Link to={`/movie/${movie._id}`}>
-                  <div>{movie.title}</div>
-                </Link>
-              </div>
-            ),
-          };
-        });
+    });
   };
 
   const handleSearch = (value) => {
     setOptions(value ? searchResult(value) : []);
-    console.log(value);
   };
-  const onSelect = (value) => {
-    console.log("onSelect", value);
+
+  const onSelect = () => {
+    setsearchMovie("");
   };
 
   return (
@@ -73,18 +63,30 @@ const SearchMovie = () => {
         options={options}
         onSelect={onSelect}
         onSearch={handleSearch}
-        size="large"
       >
         <Space direction="vertical">
-          <Search
-            placeholder=""
-            enterButton="Search"
-            size="large"
-            suffix={suffix}
-            onSearch={onSearch}
-            allowClear
+          <input
+            type="text"
+            placeholder="Search..."
             value={searchMovie}
             onChange={(e) => setsearchMovie(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "8px",
+              border: "1px solid #ccc",
+              outline: "none",
+              borderRadius: "20px",
+              background: "none",
+            }}
+          />
+          <SearchOutlined
+            style={{
+              position: "absolute",
+              right: "8px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              color: "#aaa", // Цвет иконки
+            }}
           />
         </Space>
       </AutoComplete>

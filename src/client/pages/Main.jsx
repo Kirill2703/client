@@ -13,10 +13,10 @@ const Main = () => {
     // dispatch(getCurrency())
   }, []);
     return (
-      <div>
+      <>
             <MenuClient />
             <Outlet />
-      </div>
+      </>
     );
 }
 

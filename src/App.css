@@ -1,12 +1,12 @@
 body {
-  background-color: #3d3d3d;
+  background-color: #232323;
   margin: 0px;
   font-family: "Lato";
+  
 }
 
 img {
   max-width: 100%;
-  display: block;
 }
 
 * {
@@ -39,7 +39,7 @@ img {
   height: auto !important;
 }
 
-/* page-Movie */
+/* page-movie */
 .movie-information {
   position: absolute;
   top: 0;
@@ -128,23 +128,7 @@ h1 {
   padding: 0 80px;
 }
 
-/* home-page */
-.all-movies {
-  display: flex;
-  justify-content: center;
-  margin: 0 80px;
-  gap: 20px;
-}
-
 /* movie-card */
-.card {
-  width: 240px;
-  height: 360px;
-}
-
-.card img {
-  height: 100%;
-}
 
 .card {
   flex: 1;
@@ -153,6 +137,7 @@ h1 {
   height: 440px;
   background: #fff;
   border: 2px solid #fff;
+  border-radius: 40px;
   box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.5);
   cursor: pointer;
   transition: all 0.5s cubic-bezier(0.8, 0.5, 0.2, 1.4);
@@ -231,18 +216,19 @@ h1 {
 }
 
 .scrool-holder {
-  --count: 10;
+  --count: 5;
   overflow: hidden;
   width: min(100%, calc(340px * var(--count)));
   margin: auto;
 }
 
 .scrool-holder .scrool-tray:first-child {
-  animation: scrool-tray-hero 60s linear infinite;
+  animation: scrool-tray-hero 40s linear infinite;
 }
 
 .scrool-holder .scrool-tray:last-child {
-  animation: scrool-tray-hero 40s linear infinite;
+  animation: scrool-tray-hero 30s linear infinite;
+  width: calc(340px * (var(--count) * 2));
 }
 
 @keyframes scrool-tray-hero {
@@ -279,7 +265,7 @@ h1 {
   color: red;
 }
 
-/* login-page */
+/* slider-movie-page */
 
 .slider-relative {
   position: relative;
@@ -304,10 +290,6 @@ h1 {
   pointer-events: none;
 }
 
-.mainMenu.scroll {
-  background-color: violet;
-}
-
 /* Show actors */
 
 .custom-prev-arrow,
@@ -330,3 +312,64 @@ h1 {
   font-size: 24px;
   color: #777;
 }
+
+/* header */
+
+.mainMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.menu-left,
+.menu-right,
+.menu-search{
+  display: flex;
+  justify-content: center;
+}
+
+.menu-link {
+  text-decoration: none;
+  color: black;
+  margin: 0 10px;
+  font-size: 18px;
+  transition: all 0.3s;
+}
+
+.menu-link:hover {
+  color: gray; 
+}
+
+.menu-auth,
+.menu-guest {
+  display: flex;
+  align-items: flex-end;
+  justify-content: end;
+}
+
+.menu-subscribe{
+  text-decoration: none;
+  color: black;
+  margin: 0 40px;
+  font-size: 18px;
+  transition: all 0.3s;
+}
+
+.menu-subscribe:hover{
+  color: gray;
+}
+
+
+.item-icons{
+  display: flex;
+  align-items: end;
+}
+
+
+
+

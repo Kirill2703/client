@@ -1,8 +1,7 @@
-import { Card } from "antd";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { InfoCircleOutlined } from "@ant-design/icons";
+
 
 
 const RelatedMovies = () => {
@@ -10,6 +9,9 @@ const RelatedMovies = () => {
   const [movie, setMovie] = useState("");
   const movies = useSelector((state) => state.movies.movies);
   const [relatedMovies, setRelatedMovies] = useState([]);
+  const [relatedMoviesFirstBlock, setRelatedMoviesFirstBlock] = useState([]);
+  const [relatedMoviesSecondBlock, setRelatedMoviesSecondBlock] = useState([]);
+
 
   useEffect(() => {
     const currentMovie = movies.find((m) => m._id === id);
@@ -24,7 +26,31 @@ const RelatedMovies = () => {
     });
     setRelatedMovies(movieWithSameGenre);
   }, [id, movies]);
+
+   useEffect(() => {
+     if (movies.length > 0) {
+       const sortedMoviesFirstBlock = [...movies]
+         .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+         .slice(0, 5);
+       setRelatedMoviesFirstBlock(sortedMoviesFirstBlock);
+     }
+   }, [movies]);
   
+  useEffect(() => {
+    if (movies.length > 0) {
+      const sortedMoviesSecondBlock = [...movies]
+        .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+        .slice(5, 10);
+      setRelatedMoviesSecondBlock(sortedMoviesSecondBlock);
+    }
+  }, [movies]);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [id]);
 
   return (
     <>
@@ -32,10 +58,7 @@ const RelatedMovies = () => {
         {" "}
         Similar films by genre
       </h2>
-      <div
-        className="scrool-holder"
-        style={{ "--count": relatedMovies.length }}
-      >
+      <div className="scrool-holder">
         <div
           className="scrool-tray"
           style={{ marginTop: "20px" }}
@@ -48,14 +71,14 @@ const RelatedMovies = () => {
               "running")
           }
         >
-          {relatedMovies.map((relatedMovie) => (
+          {relatedMoviesFirstBlock.map((relatedMovie) => (
             <div key={relatedMovie._id}>
               <Link to={`/movie/${relatedMovie._id}`}>
                 <img src={relatedMovie.img} alt="" />
               </Link>
             </div>
           ))}
-          {relatedMovies.map((relatedMovie) => (
+          {relatedMoviesFirstBlock.map((relatedMovie) => (
             <div key={relatedMovie._id}>
               <Link to={`/movie/${relatedMovie._id}`}>
                 <img src={relatedMovie.img} alt="" />
@@ -74,14 +97,14 @@ const RelatedMovies = () => {
               "running")
           }
         >
-          {relatedMovies.map((relatedMovie) => (
+          {relatedMoviesSecondBlock.map((relatedMovie) => (
             <div key={relatedMovie._id}>
               <Link to={`/movie/${relatedMovie._id}`}>
                 <img src={relatedMovie.img} alt="" />
               </Link>
             </div>
           ))}
-          {relatedMovies.map((relatedMovie) => (
+          {relatedMoviesSecondBlock.map((relatedMovie) => (
             <div key={relatedMovie._id}>
               <Link to={`/movie/${relatedMovie._id}`}>
                 <img src={relatedMovie.img} alt="" />
