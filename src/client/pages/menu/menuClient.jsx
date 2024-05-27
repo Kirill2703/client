@@ -27,7 +27,7 @@ const MenuClient = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", (e) => {
-      if (window.scrollY > 80) {
+      if (window.scrollY ) {
         setScroll(true);
       } else {
         setScroll(false);
@@ -44,9 +44,15 @@ const MenuClient = () => {
 
   const authUser = (
     <div className="menu-auth">
-      <span style={{ fontSize: "18px" }}>Welcome, {auth.userData.name}</span>
-      <NavLink to="subscribes" className="menu-subscribe">
-        My subscribes
+      <span style={{ color: "#a8a0a3" }}>
+        Welcome, <span style={{ color: "#ef9d43", fontWeight: "bold" }}>{auth.userData.name}</span>
+      </span>
+      <NavLink
+        to="subscribes"
+        className="menu-subscribe"
+        style={{ color: "#a8a0a3" }}
+      >
+        <span>My subscribes</span>
       </NavLink>
       <ConfigProvider
         theme={{
@@ -66,6 +72,7 @@ const MenuClient = () => {
       >
         <Button
           type="primary"
+          size="small"
           icon={<PoweroffOutlined />}
           onClick={logoutClickHandler}
         />
@@ -88,7 +95,7 @@ const MenuClient = () => {
     <div
       className={`mainMenu ${scroll ? "scroll" : ""}`}
       ref={header}
-      style={{ paddingTop: "20px" }}
+      style={{ padding: "20px" }}
     >
       <div className="menu-left">
         <NavLink to="/" className="menu-link">
@@ -112,7 +119,7 @@ const MenuClient = () => {
         <NavLink to="/forchildrens" className="menu-link">
           <div className="item-icons">
             <FaChild style={{ fontSize: "24px" }} />
-            <span style={{ paddingLeft: "4px" }}>For childrens</span>
+            <span style={{ paddingLeft: "4px" }}>For kids</span>
           </div>
         </NavLink>
         <NavLink to="/subscribes-type" className="menu-link">

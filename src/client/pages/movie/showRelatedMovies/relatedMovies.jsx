@@ -54,14 +54,13 @@ const RelatedMovies = () => {
 
   return (
     <>
-      <h2 style={{ textAlign: "center", marginTop: "120px" }}>
-        {" "}
+      <h2 style={{ textAlign: "center", marginTop: "40px" }}>
         Similar films by genre
       </h2>
       <div className="scrool-holder">
         <div
           className="scrool-tray"
-          style={{ marginTop: "20px" }}
+          style={{ marginTop: "40px" }}
           onMouseOver={(e) =>
             (e.target.closest(".scrool-tray").style.animationPlayState =
               "paused")

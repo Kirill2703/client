@@ -35,9 +35,9 @@ const ShowNewMovies = () => {
 
   return (
     <>
-      <h2 style={{ textAlign: "center", marginTop: "120px" }}>
-        {" "}
-        hot new movies
+      <h2 style={{ textAlign: "center", marginTop: "40px" }}>
+        
+        Hot new movies
       </h2>
       <div
         className="scrool-holder"

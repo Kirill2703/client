@@ -38,8 +38,8 @@ const ShowActors = ({ movie }) => {
   };
 
   return (
-    <div style={{ marginTop: "100px" }}>
-      <h1 style={{ textAlign: "center" }}>Actors</h1>
+    <div style={{ marginTop: "40px" }}>
+      <h2 style={{ textAlign: "center" }}>Actors</h2>
       <div>
         <Slider {...settings}>
           {movie.actors.map((actor) => (

@@ -38,9 +38,9 @@ const Filmmaker = () => {
     }
     return (
       <div>
-        <h1>
+        <h2>
           All films type: {filmmakerName} {filmmakerSurname}
-        </h1>
+        </h2>
         {filmmakerMovies.map((movie) => (
           <MovieCard movie={movie} key={movie._id} />
         ))}

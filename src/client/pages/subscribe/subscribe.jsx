@@ -56,7 +56,7 @@ const Subscribe = () => {
         <Text
           style={{ display: "block", textAlign: "center", fontSize: "18px" }}
         >
-          No subscriptions
+          No Subscriptions
         </Text>
       ) : (
         <List

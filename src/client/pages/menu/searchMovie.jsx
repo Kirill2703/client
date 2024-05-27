@@ -77,6 +77,7 @@ const SearchMovie = () => {
               outline: "none",
               borderRadius: "20px",
               background: "none",
+              color: "white"
             }}
           />
           <SearchOutlined

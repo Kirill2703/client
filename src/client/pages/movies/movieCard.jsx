@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-
 const MovieCard = ({ movie }) => {
+  if (!movie || !movie.description) return null;
+  const transcatedDecription =
+    movie.description.length > 550
+      ? `${movie.description.slice(0, 550)}...`
+      : movie.description;
+
   return (
     <>
       <div className="card">
-        <img src={movie.img} alt={movie.title} style={{ width: "" }} />
+        <img src={movie.img} alt={movie.title} />
         <div className="descriptions">
           <h4 style={{ textAlign: "center" }}>{movie.title}</h4>
 
-          <p>{movie.description }</p>
+          <p>{transcatedDecription}</p>
         </div>
         <Link
           to={`/movie/${movie._id}`}
@@ -21,10 +26,8 @@ const MovieCard = ({ movie }) => {
             left: 0,
             right: 0,
           }}
-        >
-        </Link>
+        ></Link>
       </div>
-
     </>
   );
 };

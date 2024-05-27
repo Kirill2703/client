@@ -22,7 +22,7 @@ const RecoverPassword = () => {
     };
     return (
       <div>
-        <h1 style={{ textAlign: "center" }}>Recover Password</h1>
+        <h2 style={{ textAlign: "center" }}>Recover Password</h2>
         {error}
         <Form
           name="basic"
@@ -35,11 +35,10 @@ const RecoverPassword = () => {
           style={{
             maxWidth: 400,
           }}
-            onFinish={onFinish}
+          onFinish={onFinish}
           autoComplete="off"
         >
           <Form.Item
-            label="E-mail"
             name="email"
             rules={[
               {
@@ -48,7 +47,7 @@ const RecoverPassword = () => {
               },
             ]}
           >
-            <Input placeholder="Input your e-mail" />
+            <Input placeholder='E-mail' />
           </Form.Item>
 
           <Form.Item

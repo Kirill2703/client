@@ -6,6 +6,7 @@ const CustomLinkNameSurname = ({ href, actor }) => {
   return (
     <div
       style={{
+        marginTop: "40px",
         padding: "0 8px",
         display: "flex",
         flexDirection: "column",

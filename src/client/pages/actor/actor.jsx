@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getActor } from '../../../thunks/actorsThunk';
 import MovieCard from '../movies/movieCard';
+import { Col, Row } from 'antd';
 
 const Actor = () => {
     const dispatch = useDispatch();
@@ -38,12 +39,16 @@ const Actor = () => {
     }
     return (
       <div>
-        <h1>
+        <h2 style={{ textAlign: "center", marginTop: "40px" }}>
           All films with: {actorName} {actorSurname}
-        </h1>
-        {actorMovies.map((movie) => (
-          <MovieCard movie={movie} key={movie._id} />
-        ))}
+        </h2>
+        <Row>
+          {actorMovies.map((movie) => (
+            <Col span={4} key={movie.id} style={{ margin: "24px" }}>
+              <MovieCard movie={movie} key={movie._id} />
+            </Col>
+          ))}
+        </Row>
       </div>
     );
 }

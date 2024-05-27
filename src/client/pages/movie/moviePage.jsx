@@ -16,6 +16,7 @@ import ShowActors from "./showActor/showActors";
 import RelatedMovies from "./showRelatedMovies/relatedMovies";
 import { getSubscribeUser } from "../../../thunks/subscribeThunk";
 import ShowNewMovies from "./showNewMovies/showNewMovies";
+import CustomLinkNameSurname from "./customLinkNameSurname";
 
 
 const MoviePage = () => {
@@ -118,9 +119,9 @@ const MoviePage = () => {
                 </Col>
                 <Col span={14} offset={4}>
                   <div className="information-block">
-                    <h1>{movie.title}</h1>
+                    <h2>{movie.title}</h2>
                     <div className="sml-info">
-                      <div>
+                      <div >
                         <CustomLink data={movie.countries} href="country" />
                       </div>
                       <div>

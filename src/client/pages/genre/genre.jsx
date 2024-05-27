@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getGenre } from '../../../thunks/genresThunk';
 import MovieCard from '../movies/movieCard';
+import { Col, Row } from 'antd';
 
 const Genre = () => {
     const dispatch = useDispatch();
@@ -31,10 +32,14 @@ const Genre = () => {
      }
     return (
       <div>
-        <h1>All films genre: {genre}</h1>
-        {genreMovies.map((movie) => (
-          <MovieCard movie={movie} />
-        ))}
+        <h2>All films genre: {genre}</h2>
+        <Row>
+          {genreMovies.map((movie) => (
+            <Col span={4} key={movie.id} style={{ margin: "24px" }}>
+              <MovieCard movie={movie} key={movie._id} />
+            </Col>
+          ))}
+        </Row>
       </div>
     );
 }

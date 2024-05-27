@@ -26,7 +26,7 @@ const PageHome = () => {
   return (
     <>
       <CarouselHome scrollToElement={scrollToElement} />
-      <h1 ref={scrollRef } style={{textAlign: "center", marginTop: "120px"}}>New releases</h1>
+      <h2 ref={scrollRef} style={{textAlign: "center", marginTop: "120px"}}>New releases</h2>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Row >
           {latestMovies.map((movie) => (

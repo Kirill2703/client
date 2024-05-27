@@ -11,29 +11,14 @@ const AllFilms = () => {
   });
 
   return (
-      <>
-          <h1 style={{textAlign: "center", marginTop: "60px"}}>All films in our library</h1>
-      <Row >
-        {films.map((film) => (
-          <Col span={4} key={film.id} style={{ margin: "24px" }}>
-            <div className="card" key={film._id}>
-              <img src={film.img} alt={film.title} style={{ width: "" }} />
-              <div className="descriptions">
-                <h4 style={{ textAlign: "center" }}>{film.title}</h4>
-
-                <p>{film.description}</p>
-              </div>
-              <Link
-                to={`/movie/${film._id}`}
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                }}
-              ></Link>
-            </div>
+    <>
+      <h2 style={{ textAlign: "center", marginTop: "40px" }}>
+        All films in our library
+      </h2>
+      <Row>
+        {films.map((movie) => (
+          <Col span={4} key={movie.id} style={{ margin: "24px" }}>
+            <MovieCard movie={movie} key={movie._id} />
           </Col>
         ))}
       </Row>

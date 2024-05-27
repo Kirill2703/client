@@ -25,7 +25,7 @@ const ChangePassword = () => {
     };
   return (
     <div>
-      <h1>Change Password</h1>
+      <h2>Change Password</h2>
 
       <Form
         name="basic"
